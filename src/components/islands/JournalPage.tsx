@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePlannerStore } from '../../stores/usePlannerStore';
 import { getMoonPhaseForDate, getZodiacSign } from '../../lib/celestial';
-import { todayKey, formatDayName } from '../../lib/utils';
+import { todayKey, formatDayName, downloadGrimoire } from '../../lib/utils';
 
 const PROMPTS = [
   'What did the moon whisper to you tonight?',
@@ -314,16 +314,25 @@ export default function JournalPage() {
                 transition={{ duration: 0.35 }}
                 className="overflow-hidden space-y-3"
               >
-                {/* Search */}
-                <div className="relative">
-                  <input
-                    type="text"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    placeholder="Search entries..."
-                    className="w-full bg-[var(--bg-card)]/30 border border-[var(--text-3)]/15 rounded-lg px-3 py-2 pl-8 text-xs font-serif text-[var(--text-1)] placeholder:text-[var(--text-3)]/40 focus:outline-none focus:border-[var(--gold)]/30"
-                  />
-                  <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--text-3)]/40 text-xs">⌕</span>
+                {/* Search & Export */}
+                <div className="flex items-center justify-between gap-3">
+                  <div className="relative flex-1">
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="Search entries..."
+                      className="w-full bg-[var(--bg-card)]/30 border border-[var(--text-3)]/15 rounded-lg px-3 py-2 pl-8 text-xs font-serif text-[var(--text-1)] placeholder:text-[var(--text-3)]/40 focus:outline-none focus:border-[var(--gold)]/30"
+                    />
+                    <span className="absolute left-2.5 top-1/2 -translate-y-1/2 text-[var(--text-3)]/40 text-xs">⌕</span>
+                  </div>
+                  <button
+                    onClick={() => downloadGrimoire(journalEntries)}
+                    className="text-[9px] font-typewriter tracking-wider text-[var(--gold)]/50 hover:text-[var(--gold)] uppercase transition-colors flex items-center gap-1 flex-shrink-0 whitespace-nowrap"
+                    title="Download all entries as text"
+                  >
+                    <span>↓</span> Export
+                  </button>
                 </div>
 
                 {filteredEntries.length === 0 && searchTerm && (
