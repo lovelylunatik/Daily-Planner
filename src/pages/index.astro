@@ -1,19 +1,23 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
+import RitualMini from '../components/islands/RitualMini';
 ---
 <Layout title="The Oracle's Desk">
   <div class="max-w-6xl mx-auto">
     <!-- Hub Grid — asymmetrical scrapbook collage -->
     <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min">
-      <!-- Calendar mini -->
-      <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1">
-        <div class="text-center py-2">
-          <div class="font-typewriter text-3xl text-[var(--gold)]">24</div>
-          <div class="font-serif text-sm text-[var(--text-2)] italic mt-1">July</div>
-          <div class="font-typewriter text-[10px] tracking-wider text-[var(--text-3)] mt-2">🌙 WAXING GIBBOUS</div>
-        </div>
-      </ScrapbookPane>
+      <!-- Calendar mini — links to full star chart -->
+      <a href="/week" class="contents">
+        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1">
+          <div class="text-center py-2">
+            <div class="font-typewriter text-3xl text-[var(--gold)]">25</div>
+            <div class="font-serif text-sm text-[var(--text-2)] italic mt-1">July</div>
+            <div class="font-typewriter text-[10px] tracking-wider text-[var(--text-3)] mt-2">🌖 WANING GIBBOUS</div>
+            <div class="font-typewriter text-[9px] text-[var(--gold)]/60 tracking-wider mt-3 uppercase">CLICK FOR FULL CHART</div>
+          </div>
+        </ScrapbookPane>
+      </a>
 
       <!-- Oracle card -->
       <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2">
@@ -23,25 +27,12 @@ import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
         <p class="font-typewriter text-[10px] text-[var(--text-3)] mt-3 tracking-wide">— PULLED THIS MORNING</p>
       </ScrapbookPane>
 
-      <!-- Rituals — tall left column -->
+      <!-- Rituals — live data island -->
       <ScrapbookPane title="Today's Rituals" rotation={0.5} className="md:row-span-2">
-        <div class="space-y-3">
-          <div class="flex items-center gap-2 text-sm">
-            <span class="w-4 h-4 rounded-full border border-[var(--gold)] flex items-center justify-center text-[8px] text-[var(--gold)]">✓</span>
-            <span class="line-through text-[var(--text-3)]">Light morning candle</span>
-          </div>
-          <div class="flex items-center gap-2 text-sm">
-            <span class="w-4 h-4 rounded-full border border-[var(--text-3)]"></span>
-            <span>Doctor's appointment — 2:00 PM</span>
-          </div>
-          <div class="flex items-center gap-2 text-sm">
-            <span class="w-4 h-4 rounded-full border border-[var(--text-3)]"></span>
-            <span>Buy sage and lavender</span>
-          </div>
-          <div class="mt-4 pt-3 border-t border-[var(--text-3)]/20 font-typewriter text-[10px] text-[var(--text-3)] tracking-wide">
-            1 OF 3 COMPLETE
-          </div>
-        </div>
+        <RitualMini client:load />
+        <a href="/rituals" class="block mt-4 pt-3 border-t border-[var(--text-3)]/20 font-typewriter text-[10px] text-[var(--gold)]/60 tracking-wide text-center hover:text-[var(--gold)] transition-colors uppercase">
+          View full altar
+        </a>
       </ScrapbookPane>
 
       <!-- Journal prompt -->
@@ -57,8 +48,8 @@ import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
       <!-- Clock -->
       <ScrapbookPane title="The Hour" rotation={1.0}>
         <div class="text-center">
-          <div class="font-typewriter text-2xl text-[var(--gold)]">10:42</div>
-          <div class="font-serif text-xs text-[var(--text-2)] italic mt-1">AM • Pacific</div>
+          <div class="font-typewriter text-2xl text-[var(--gold)]" id="live-time">--:--</div>
+          <div class="font-serif text-xs text-[var(--text-2)] italic mt-1">AM • Local</div>
         </div>
       </ScrapbookPane>
 
