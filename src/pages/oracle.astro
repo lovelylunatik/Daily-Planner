@@ -1,11 +1,12 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
+import OraclePage from '../components/islands/OraclePage';
 ---
-<Layout title="The Oracle's Record">
+<Layout title="The Oracle">
   <div class="max-w-5xl mx-auto pt-4">
-    <ScrapbookPane title="The Oracle's Record" rotation={-0.3}>
-      <p class="text-[var(--text-2)] italic">Tarot deck of past oracles coming soon...</p>
+    <ScrapbookPane title="" rotation={0.5}>
+      <OraclePage client:load />
     </ScrapbookPane>
   </div>
 </Layout>

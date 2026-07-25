@@ -4,6 +4,7 @@ import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
 import RitualMini from '../components/islands/RitualMini';
 import LivingClock from '../components/islands/LivingClock';
 import JournalMini from '../components/islands/JournalMini';
+import OracleMini from '../components/islands/OracleMini';
 ---
 <Layout title="The Oracle's Desk">
   <div class="max-w-6xl mx-auto">
@@ -23,10 +24,7 @@ import JournalMini from '../components/islands/JournalMini';
 
       <!-- Oracle card -->
       <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2">
-        <blockquote class="font-serif text-lg italic text-[var(--text-1)] leading-relaxed border-l-2 border-[var(--gold-dim)] pl-4">
-          "I told the stars about you."
-        </blockquote>
-        <p class="font-typewriter text-[10px] text-[var(--text-3)] mt-3 tracking-wide">— PULLED THIS MORNING</p>
+        <OracleMini client:load />
       </ScrapbookPane>
 
       <!-- Rituals — live data island -->
