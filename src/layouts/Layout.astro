@@ -1,0 +1,34 @@
+---
+import '../styles/global.css';
+import CelestialBackground from '../components/ui/CelestialBackground.astro';
+import CelestialCompass from '../components/ui/CelestialCompass.astro';
+import ThemeToggle from '../components/islands/ThemeToggle.tsx';
+const { title } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <script is:inline>
+    (function(){
+      var s=localStorage.getItem('theme'),d=window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var t=s||(d?'dark':'light');
+      document.documentElement.classList.toggle('dark',t==='dark');
+      document.documentElement.classList.toggle('light',t==='light');
+    })();
+  </script>
+</head>
+<body class="min-h-screen bg-[var(--deep)] text-[var(--text-1)] antialiased">
+  <CelestialBackground />
+  <CelestialCompass />
+  <div class="fixed top-4 right-4 z-50">
+    <ThemeToggle client:load />
+  </div>
+  <main class="md:pl-20 pt-4 pb-20 md:pb-4 px-4 md:px-6 lg:px-8 min-h-screen">
+    <slot />
+  </main>
+</body>
+</html>

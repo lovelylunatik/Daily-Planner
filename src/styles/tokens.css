@@ -1,0 +1,71 @@
+/* ===== DESIGN TOKENS ===== */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Special+Elite&display=swap');
+
+:root {
+  --void:    #060d1a;
+  --deep:    #0f172a;
+  --mid:     #16213e;
+  --card:    rgba(22,33,62,0.55);
+  --paper:   rgba(240,230,210,0.04);
+  
+  --text-1:    #f0e6d2;
+  --text-2:    #c4a882;
+  --text-3:    #8a7a6a;
+  
+  --gold:        #c9a96e;
+  --gold-bright: #dcc088;
+  --gold-dim:    rgba(201,169,110,0.2);
+  --gold-glow:   rgba(201,169,110,0.08);
+  
+  --rose:       #b07078;
+  --rose-soft:  rgba(176,112,120,0.25);
+  --lavender:   #a895b6;
+  --lav-soft:   rgba(168,149,182,0.2);
+  
+  --cream:   #f0e6d2;
+  --aged:    #d4c4a8;
+  --sepia:   #b8a080;
+  
+  --shadow: rgba(0,0,0,0.35);
+}
+
+.light {
+  --void:    #d4d8d4;
+  --deep:    #7a947a;
+  --mid:     #8fa08f;
+  --card:    rgba(250,248,245,0.65);
+  --paper:   rgba(250,248,245,0.85);
+  
+  --text-1:    #2c3a2c;
+  --text-2:    #5a6b5a;
+  --text-3:    #889888;
+  
+  --gold:        #a08850;
+  --gold-bright: #c0a068;
+  --gold-dim:    rgba(160,136,80,0.2);
+  --gold-glow:   rgba(160,136,80,0.06);
+  
+  --rose:       #a06068;
+  --rose-soft:  rgba(160,96,104,0.2);
+  --lavender:   #8a7a96;
+  --lav-soft:   rgba(138,122,150,0.18);
+  
+  --cream:   #faf8f5;
+  --aged:    #f0e8d8;
+  --sepia:   #c4b494;
+  
+  --shadow: rgba(0,0,0,0.12);
+}
+
+html {
+  font-family: 'Cormorant Garamond', Garamond, Georgia, serif;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-1);
+  background-color: var(--deep);
+  transition: background-color 0.7s cubic-bezier(0.4,0,0.2,1), color 0.7s cubic-bezier(0.4,0,0.2,1);
+}
+
+.font-typewriter { font-family: 'Special Elite', 'Courier Prime', Courier, monospace; }
+.font-serif      { font-family: 'Cormorant Garamond', Garamond, Georgia, serif; }
+::selection      { background: var(--gold-dim); color: var(--text-1); }

@@ -1,0 +1,34 @@
+---
+const routes = [
+  { path: '/',        label: "Oracle's Desk", glyph: '☾' },
+  { path: '/week',    label: 'Star Chart',    glyph: '☀' },
+  { path: '/journal', label: 'Grimoire',      glyph: '✦' },
+  { path: '/rituals', label: 'Altar',         glyph: '✓' },
+  { path: '/oracle',  label: 'Oracle Record', glyph: '⚛' },
+  { path: '/grimoire',label: 'Archive',       glyph: '✉' },
+  { path: '/settings',label: 'Apothecary',    glyph: '⚙' },
+];
+const current = Astro.url.pathname;
+---
+<nav class="celestial-compass fixed left-0 bottom-0 md:bottom-auto md:top-0 md:left-0 h-16 md:h-screen md:w-20 w-full flex md:flex-col flex-row items-center justify-center md:justify-start md:pt-6 gap-3 md:gap-4 z-50 bg-transparent px-2 md:px-0 md:py-8">
+  {routes.map((r) => {
+    const active = (r.path === '/' ? current === '/' : current.startsWith(r.path));
+    return (
+      <a
+        href={r.path}
+        class:list={[
+          'relative group flex items-center justify-center w-10 h-10 rounded-full transition-all duration-300',
+          active
+            ? 'wax-seal scale-110 shadow-glow'
+            : 'bg-parchment-900/40 hover:bg-parchment-800/50 hover:scale-105 backdrop-blur-sm border border-parchment-900/20'
+        ]}
+        style="text-decoration: none;"
+      >
+        <span class={active ? 'text-navy-950 font-bold' : 'text-parchment-400'} style="font-size: 1.1rem; line-height: 1;">{r.glyph}</span>
+        <span class="font-typewriter absolute left-full ml-3 px-2 py-1 rounded bg-parchment-900/80 text-parchment-200 text-xs whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none hidden md:block" style="font-size: 0.7rem;">
+          {r.label}
+        </span>
+      </a>
+    );
+  })}
+</nav>

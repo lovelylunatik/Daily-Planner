@@ -1,0 +1,11 @@
+@import './tokens.css';
+@import './textures.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html  { scroll-behavior: smooth; }
+  body  { background-color: var(--deep); color: var(--text-1); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
+}

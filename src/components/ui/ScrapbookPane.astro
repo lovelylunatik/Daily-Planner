@@ -1,0 +1,10 @@
+---
+interface Props { title: string; rotation?: number; className?: string; }
+const { title, rotation = 0, className = '' } = Astro.props;
+---
+<div class:list={['paper-lift paper-grain deckled linen relative p-5', className]} style={`transform: rotate(${rotation}deg); background: var(--aged);`}>
+  <div class="botanical-corner relative z-10">
+    <h3 class="font-typewriter text-xs tracking-[0.2em] text-[var(--text-2)] uppercase mb-3">{title}</h3>
+    <div class="font-serif text-[var(--text-1)] leading-relaxed"><slot /></div>
+  </div>
+</div>
