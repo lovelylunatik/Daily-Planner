@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
 import RitualMini from '../components/islands/RitualMini';
 import LivingClock from '../components/islands/LivingClock';
+import JournalMini from '../components/islands/JournalMini';
 ---
 <Layout title="The Oracle's Desk">
   <div class="max-w-6xl mx-auto">
@@ -38,12 +39,7 @@ import LivingClock from '../components/islands/LivingClock';
 
       <!-- Journal prompt -->
       <ScrapbookPane title="Grimoire" rotation={-0.6} className="md:col-span-2">
-        <p class="text-[var(--text-2)] italic text-sm leading-relaxed">
-          "Record your thoughts, intentions, dreams..." The parchment waits.
-        </p>
-        <div class="mt-4 h-16 rounded border border-dashed border-[var(--text-3)]/30 flex items-center justify-center">
-          <span class="font-typewriter text-[10px] text-[var(--text-3)] tracking-wider">TAP TO WRITE</span>
-        </div>
+        <JournalMini client:load />
       </ScrapbookPane>
 
       <!-- Clock -->
