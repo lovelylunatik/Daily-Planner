@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
 import RitualMini from '../components/islands/RitualMini';
+import LivingClock from '../components/islands/LivingClock';
 ---
 <Layout title="The Oracle's Desk">
   <div class="max-w-6xl mx-auto">
@@ -47,10 +48,7 @@ import RitualMini from '../components/islands/RitualMini';
 
       <!-- Clock -->
       <ScrapbookPane title="The Hour" rotation={1.0}>
-        <div class="text-center">
-          <div class="font-typewriter text-2xl text-[var(--gold)]" id="live-time">--:--</div>
-          <div class="font-serif text-xs text-[var(--text-2)] italic mt-1">AM • Local</div>
-        </div>
+        <LivingClock client:load />
       </ScrapbookPane>
 
       <!-- Mood -->
