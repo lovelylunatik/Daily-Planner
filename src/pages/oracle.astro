@@ -1,12 +1,10 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
-import OraclePage from '../components/islands/OraclePage';
 ---
 <Layout title="The Oracle">
-  <div class="max-w-5xl mx-auto pt-4">
-    <ScrapbookPane title="" rotation={0.5}>
-      <OraclePage client:load />
-    </ScrapbookPane>
+  <meta http-equiv="refresh" content="0;url=/" />
+  <div class="max-w-5xl mx-auto pt-20 text-center">
+    <p class="font-typewriter text-xs text-[var(--text-3)] tracking-wider">Return to the Desk...</p>
+    <a href="/" class="inline-block mt-4 font-serif text-lg italic text-[var(--gold)]">The Oracle&apos;s Desk &rarr;</a>
   </div>
 </Layout>
