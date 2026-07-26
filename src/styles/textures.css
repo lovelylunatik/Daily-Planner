@@ -526,3 +526,101 @@
   );
 }
 
+
+
+/* ===== RITUAL CARDS ═══ */
+
+/* Paper strip with torn edges */
+.ritual-strip {
+  position: relative;
+  background: linear-gradient(135deg, rgba(240,230,210,0.04) 0%, rgba(240,230,210,0.02) 100%);
+  border: 1px solid rgba(201,169,110,0.08);
+  clip-path: polygon(
+    0% 2%, 3% 0%, 8% 3%, 15% 1%, 22% 4%, 30% 2%, 38% 5%, 46% 2%, 54% 4%, 62% 1%,
+    70% 3%, 78% 0%, 86% 2%, 92% 4%, 100% 1%,
+    100% 98%, 96% 100%, 90% 97%, 84% 99%, 78% 96%, 72% 98%, 66% 95%, 60% 97%,
+    54% 94%, 48% 96%, 42% 99%, 36% 96%, 30% 98%, 24% 95%, 18% 97%, 12% 95%,
+    6% 98%, 0% 96%
+  );
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.ritual-strip::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 8px;
+  bottom: 8px;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.15) 20%, rgba(201,169,110,0.15) 80%, transparent);
+  pointer-events: none;
+}
+
+/* Carry-over candle glow */
+.carry-glow {
+  position: relative;
+}
+.carry-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 0;
+  box-shadow: 0 0 12px rgba(201,169,110,0.15), 0 0 24px rgba(201,169,110,0.06), inset 0 0 12px rgba(201,169,110,0.04);
+  animation: candle-pulse 3s ease-in-out infinite;
+}
+@keyframes candle-pulse {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Wax seal checkbox */
+.wax-seal-check {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid rgba(201,169,110,0.5);
+  background: rgba(201,169,110,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.wax-seal-check:hover {
+  background: rgba(201,169,110,0.15);
+  transform: scale(1.05);
+}
+.wax-seal-check.checked {
+  background: rgba(201,169,110,0.25);
+  border-color: var(--gold);
+  box-shadow: 0 0 8px rgba(201,169,110,0.3);
+}
+.wax-seal-check.checked::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,169,110,0.2);
+  animation: seal-ring 2s ease-in-out infinite;
+}
+@keyframes seal-ring {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.15); opacity: 0; }
+}
+
+/* Completion sparkle */
+.completion-sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--gold);
+  pointer-events: none;
+  z-index: 10;
+}
+

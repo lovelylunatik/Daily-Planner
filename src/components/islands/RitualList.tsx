@@ -74,7 +74,7 @@ export default function RitualList() {
                       onClick={(e) => { e.stopPropagation(); toggleSubTask(task.id, sub.id); }}
                       className="flex items-center gap-2 text-xs w-full text-left"
                     >
-                      <span className={`w-3 h-3 rounded-sm border flex items-center justify-center flex-shrink-0 ${sub.completed ? 'border-[var(--gold)] bg-[var(--gold)]/20' : 'border-[var(--text-3)]/30'}`}>
+                      <span className={'w-3 h-3 rounded-sm border flex items-center justify-center flex-shrink-0 ' + (sub.completed ? 'border-[var(--gold)] bg-[var(--gold)]/20' : 'border-[var(--text-3)]/30')}>
                         {sub.completed && <span className="text-[8px] text-[var(--gold)]">✓</span>}
                       </span>
                       <span className={sub.completed ? 'text-[var(--text-3)] line-through' : 'text-[var(--text-2)]'}>{sub.title}</span>
@@ -163,8 +163,13 @@ function SectionTitle({ children, icon }: { children: React.ReactNode; icon?: st
 
 function EventCard({ event }: { event: { id: string; title: string; time?: string; date: string } }) {
   return (
-    <motion.div className="paper-lift rounded-lg p-3 bg-[var(--bg-card)]/60 flex items-center gap-3 border-l-2 border-[var(--rose)]">
-      <div className="w-5 h-5 rounded-full border border-[var(--text-3)]/30 flex items-center justify-center flex-shrink-0">
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: -4 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="ritual-strip flex items-center gap-3 relative z-[1]"
+    >
+      <div className="w-5 h-5 rounded-full border border-[var(--text-3)]/30 flex items-center justify-center flex-shrink-0 bg-[var(--deep)]/50">
         <span className="text-[10px] text-[var(--text-3)]">☉</span>
       </div>
       <div className="flex-1 min-w-0">
@@ -186,18 +191,23 @@ function TaskCard({ task, onToggle, onDelete, children }: {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, height: 0, marginBottom: 0 }}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className={`
-        paper-lift rounded-lg p-3 flex items-start gap-3 mb-2 flex-col
-        bg-[var(--paper-cream)]/5
-        ${carried ? 'shadow-[0_0_12px_rgba(201,169,110,0.12)] border border-[var(--gold)]/10' : 'border border-transparent'}
-      `}
+      className={'ritual-strip flex items-start gap-3 mb-2 flex-col relative z-[1] ' + (carried ? 'carry-glow' : '')}
     >
-      <div className="flex items-center gap-3 w-full">
+      <div className="flex items-center gap-3 w-full relative z-[2]">
         <button
           onClick={() => onToggle(task.id)}
-          className="relative w-5 h-5 rounded-full border-2 border-[var(--gold)] flex items-center justify-center flex-shrink-0 hover:bg-[var(--gold)]/10 transition-colors"
+          className={'wax-seal-check ' + (task.completed ? 'checked' : '')}
         >
-          <span className="opacity-0 hover:opacity-100 text-[10px] text-[var(--gold)] absolute">✓</span>
+          {task.completed && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+              className="text-[var(--gold)] text-xs"
+            >
+              ✓
+            </motion.span>
+          )}
         </button>
         <div className="flex-1 min-w-0">
           <p className="text-sm leading-snug text-[var(--text-1)]">{task.title}</p>
@@ -222,9 +232,9 @@ function CompletedCard({ task, onToggle }: { task: Task; onToggle: (id: string) 
       initial={{ opacity: 0, y: -4 }}
       animate={{ opacity: 0.5, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="paper-lift rounded-lg p-3 flex items-center gap-3 mb-2 bg-[var(--bg-card)]/30 border border-transparent"
+      className="ritual-strip flex items-center gap-3 mb-2 relative z-[1]"
     >
-      <button onClick={() => onToggle(task.id)} className="w-5 h-5 rounded-full border-2 border-[var(--gold)] bg-[var(--gold)]/20 flex items-center justify-center flex-shrink-0">
+      <button onClick={() => onToggle(task.id)} className="wax-seal-check checked">
         <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ type: 'spring', stiffness: 500, damping: 30 }} className="text-[var(--gold)] text-xs">✓</motion.span>
       </button>
       <span className="text-sm text-[var(--text-3)] line-through flex-1">{task.title}</span>
