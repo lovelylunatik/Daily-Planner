@@ -61,3 +61,118 @@
 .star-dot { animation: twinkle 4s ease-in-out infinite alternate; }
 .star-slow { animation: twinkle 6s ease-in-out 1.5s infinite alternate; }
 .nebula { animation: drift 22s ease-in-out infinite; }
+
+/* ===== LACE & TEXTILES ===== */
+
+/* Scalloped lace edge — top */
+.lace-top {
+  position: relative;
+}
+.lace-top::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 0; right: 0;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='8' viewBox='0 0 20 8'%3E%3Cpath d='M0,8 Q5,0 10,8 Q15,0 20,8 Z' fill='none' stroke='rgba(201,169,110,0.25)' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 20px 8px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Scalloped lace edge — bottom */
+.lace-bottom {
+  position: relative;
+}
+.lace-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 0; right: 0;
+  height: 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='8' viewBox='0 0 20 8'%3E%3Cpath d='M0,0 Q5,8 10,0 Q15,8 20,0 Z' fill='none' stroke='rgba(201,169,110,0.25)' stroke-width='0.8'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 20px 8px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Damask wallpaper pattern for large backgrounds */
+.damask-bg {
+  background-color: #1f2e2e;
+  background-image:
+    radial-gradient(ellipse at 25% 25%, rgba(201,169,110,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 75% 75%, rgba(176,112,120,0.03) 0%, transparent 50%),
+    repeating-linear-gradient(90deg, transparent, transparent 3px, rgba(240,230,210,0.015) 3px 4px),
+    repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(240,230,210,0.015) 3px 4px);
+}
+
+/* Rich sage background (dark variant with warm undertones) */
+.sage-velvet {
+  background-color: #1e2a26;
+  background-image:
+    radial-gradient(ellipse at 15% 10%, rgba(122,148,122,0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(201,169,110,0.06) 0%, transparent 50%);
+}
+
+/* Torn paper all edges */
+.torn-paper {
+  clip-path: polygon(
+    0% 3%, 3% 0%, 8% 4%, 14% 1%, 20% 5%, 26% 2%, 32% 6%, 38% 3%, 44% 7%, 50% 2%,
+    56% 6%, 62% 3%, 68% 7%, 74% 2%, 80% 6%, 86% 3%, 92% 7%, 98% 4%, 100% 8%,
+    100% 92%, 97% 100%, 92% 96%, 86% 99%, 80% 95%, 74% 98%, 68% 94%, 62% 97%,
+    56% 93%, 50% 98%, 44% 94%, 38% 97%, 32% 93%, 26% 96%, 20% 92%, 14% 95%,
+    8% 91%, 3% 96%, 0% 92%
+  );
+}
+
+/* Aged paper with burnt-edge gradient */
+.aged-parchment {
+  background: #e8dcc8;
+  box-shadow:
+    inset 0 0 40px rgba(139,119,89,0.15),
+    3px 4px 12px rgba(0,0,0,0.35),
+    inset 0 -1px 0 rgba(0,0,0,0.08);
+  position: relative;
+}
+.aged-parchment::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 0 20px rgba(180,155,120,0.25);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+/* Heavy paper grain — visible */
+.heavy-grain {
+  position: relative;
+}
+.heavy-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 96px 96px;
+  mix-blend-mode: multiply;
+}
+
+/* Corner pressed flower ornament */
+.flower-corner {
+  position: relative;
+}
+.flower-corner::before {
+  content: '🌿';
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  font-size: 14px;
+  opacity: 0.35;
+  filter: sepia(0.7);
+  pointer-events: none;
+  z-index: 5;
+}
