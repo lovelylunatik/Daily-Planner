@@ -12,7 +12,8 @@ import MoodMini from '../components/islands/MoodMini';
     <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min">
       <!-- Today / Calendar — Star Chart personality -->
       <a href="/week" class="contents">
-        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1" personality="star-chart">
+        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1 relative" personality="star-chart">
+          <span class="hanging-star" style="top:10px;right:12px;" />
           <div class="text-center py-2 relative">
             <div class="font-typewriter text-3xl text-[var(--gold)]">25</div>
             <div class="font-serif text-sm text-[var(--text-2)] italic mt-1">July</div>
@@ -24,7 +25,9 @@ import MoodMini from '../components/islands/MoodMini';
       </a>
 
       <!-- Daily Oracle — Tarot personality -->
-      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2" personality="tarot">
+      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2 relative" personality="tarot">
+        <span class="hanging-star" style="top:12px;left:16px;" />
+        <span class="hanging-star" style="top:8px;right:20px;" />
         <OracleMini client:load />
       </ScrapbookPane>
 
@@ -42,9 +45,11 @@ import MoodMini from '../components/islands/MoodMini';
       </ScrapbookPane>
 
       <!-- The Hour — Sun Dial personality -->
-      <ScrapbookPane title="The Hour" rotation={1.0} personality="sundial">
-        <LivingClock client:load />
-      </ScrapbookPane>
+      <div class="newspaper-overlay">
+        <ScrapbookPane title="The Hour" rotation={1.0} personality="sundial">
+          <LivingClock client:load />
+        </ScrapbookPane>
+      </div>
 
       <!-- Mood — Celestial personality -->
       <ScrapbookPane title="Mood" rotation={-0.8} personality="celestial">
