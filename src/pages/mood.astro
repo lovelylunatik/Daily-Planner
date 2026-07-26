@@ -1,0 +1,9 @@
+---
+import Layout from '../layouts/Layout.astro';
+import MoodConstellation from '../components/islands/MoodConstellation';
+---
+<Layout title="My Constellation - Mood">
+  <div class="max-w-5xl mx-auto pt-4 pb-20">
+    <MoodConstellation client:load />
+  </div>
+</Layout>

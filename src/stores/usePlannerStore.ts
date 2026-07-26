@@ -30,11 +30,18 @@ export interface JournalEntry {
   decoration?: string;
 }
 
+export interface MoodEntry {
+  mood: string;
+  note?: string;
+  date: string;
+}
+
 interface PlannerState {
   tasks: Task[];
   events: CalendarEvent[];
   journalEntries: Record<string, JournalEntry>;
   oracleQuotes: Record<string, { quote: string; source: string }>;
+  moods: Record<string, MoodEntry>;
 
   addTask: (title: string) => void;
   toggleTask: (id: string) => void;
@@ -47,6 +54,7 @@ interface PlannerState {
 
   addJournalEntry: (entry: JournalEntry) => void;
   addOracleQuote: (date: string, quote: string, source: string) => void;
+  addMood: (date: string, mood: string, note?: string) => void;
 
   getEventsForDate: (date: string) => CalendarEvent[];
 }
@@ -62,6 +70,7 @@ export const usePlannerStore = create<PlannerState>()(
       events: [],
       journalEntries: {},
       oracleQuotes: {},
+      moods: {},
 
       addTask: (title) =>
         set((state) => ({
@@ -130,6 +139,11 @@ export const usePlannerStore = create<PlannerState>()(
       addOracleQuote: (date, quote, source) =>
         set((state) => ({
           oracleQuotes: { ...state.oracleQuotes, [date]: { quote, source } },
+        })),
+
+      addMood: (date, mood, note) =>
+        set((state) => ({
+          moods: { ...state.moods, [date]: { mood, note, date } },
         })),
 
       getEventsForDate: (date) => get().events.filter((e) => e.date === date),
