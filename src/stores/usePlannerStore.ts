@@ -20,6 +20,7 @@ export interface CalendarEvent {
   title: string;
   time?: string;
   date: string;
+  recurring?: 'daily' | 'weekly' | 'monthly';
 }
 
 export interface JournalEntry {
