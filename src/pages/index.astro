@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
+import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
 import RitualMini from '../components/islands/RitualMini';
 import LivingClock from '../components/islands/LivingClock';
 import JournalMini from '../components/islands/JournalMini';
@@ -8,26 +9,30 @@ import OracleMini from '../components/islands/OracleMini';
 import MoodMini from '../components/islands/MoodMini';
 ---
 <Layout title="The Oracle's Desk">
-  <div class="max-w-6xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min">
+  {/* Floating whimsy: cherubs, moons, butterflies, stars */}
+  <WhimsyDecorations />
+
+  <div class="max-w-6xl mx-auto relative z-10">
+    <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min relative z-10">
       <!-- Today / Calendar — Star Chart personality -->
       <a href="/week" class="contents">
         <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1 relative" personality="star-chart">
           <span class="hanging-star" style="top:10px;right:12px;" />
           <div class="text-center py-2 relative">
             <div class="font-typewriter text-3xl" style="color:#dcc088">25</div>
-            <div class="font-serif text-sm italic mt-1" style="opacity:0.8">July</div>
+            <div class="font-serif text-sm italic mt-1" style="opacity:0.85">July</div>
             <div class="font-typewriter text-[10px] tracking-wider mt-2" style="opacity:0.65">🌖 WANING GIBBOUS</div>
-            <div class="font-typewriter text-[9px] tracking-wider mt-3 uppercase" style="color:#dcc088; opacity:0.6">CLICK FOR FULL CHART</div>
+            <div class="font-typewriter text-[9px] tracking-wider mt-3 uppercase" style="color:#dcc088; opacity:0.55">CLICK FOR FULL CHART</div>
             <span class="compass-star absolute top-0 right-0 text-sm opacity-40"></span>
           </div>
         </ScrapbookPane>
       </a>
 
-      <!-- Daily Oracle — Tarot personality -->
-      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2 relative" personality="tarot">
+      <!-- Daily Oracle — Tarot card sized, centered in its pane -->
+      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2 relative flex items-center justify-center" personality="tarot">
         <span class="hanging-star" style="top:12px;left:16px;" />
         <span class="hanging-star" style="top:8px;right:20px;" />
+        <span class="hanging-star" style="top:20px;left:60%;" />
         <OracleMini client:load />
       </ScrapbookPane>
 
@@ -44,7 +49,7 @@ import MoodMini from '../components/islands/MoodMini';
         <JournalMini client:load />
       </ScrapbookPane>
 
-      <!-- The Hour — Sun Dial personality -->
+      <!-- The Hour — Wooden clock, cozy size -->
       <div class="newspaper-overlay">
         <ScrapbookPane title="The Hour" rotation={1.0} personality="sundial">
           <LivingClock client:load />

@@ -300,3 +300,45 @@
   );
 }
 
+
+/* ════════════════════════════════════════ */
+/* ═══ WHIMSY BACKGROUND DECORATIONS ═════ */
+/* ════════════════════════════════════════ */
+
+.crescent-moon {
+  position: relative;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 65% 35%, rgba(240,230,210,0.25) 0%, rgba(201,169,110,0.15) 40%, transparent 70%);
+  box-shadow: 0 0 18px rgba(201,169,110,0.15);
+}
+.crescent-moon::after {
+  content: '';
+  position: absolute;
+  top: -2px; right: -6px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: var(--deep);
+  box-shadow: inset -3px -2px 6px rgba(0,0,0,0.3);
+}
+.moon-face {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 10px;
+  color: rgba(201,169,110,0.55);
+  z-index: 2;
+  font-family: serif;
+  letter-spacing: 1px;
+}
+
+/* Small floating star sparkles */
+.sparkle-dot {
+  position: absolute;
+  width: 3px; height: 3px;
+  border-radius: 50%;
+  background: rgba(201,169,110,0.6);
+  box-shadow: 0 0 6px rgba(201,169,110,0.4);
+}
+

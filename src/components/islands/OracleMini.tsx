@@ -28,70 +28,119 @@ export default function OracleMini() {
     setRevealed(false);
   };
 
+  const card = oracleQuotes[today] || getCardForDate(today);
+
   if (!mounted) {
     return (
-      <div className="h-20 flex items-center justify-center">
-        <span className="w-6 h-6 border border-[var(--gold)]/60 rounded-full animate-pulse" />
+      <div className="flex items-center justify-center py-4">
+        <span className="w-5 h-5 border-2 border-[#c9a96e]/60 rounded-full animate-pulse" />
       </div>
     );
   }
 
-  const card = oracleQuotes[today] || getCardForDate(today);
-
   return (
-    <div className="relative mx-auto w-full max-w-md" style={{ perspective: '800px' }}>
-      <div
-        className="relative w-full transition-transform duration-700"
-        style={{
-          transformStyle: 'preserve-3d',
-          transform: revealed ? 'rotateY(180deg)' : 'rotateY(0deg)',
-        }}
-      >
-        {/* === FRONT: Decorative card back === */}
+    <div className="flex justify-center py-2">
+      <div className="relative" style={{ perspective: '900px' }}>
         <div
-          className="w-full min-h-[180px] flex flex-col items-center justify-center gap-3 cursor-pointer select-none paper-grain"
-          style={{ backfaceVisibility: 'hidden' }}
+          className="relative transition-transform duration-700 cursor-pointer select-none"
+          style={{
+            width: '148px',
+            height: '250px',
+            transformStyle: 'preserve-3d',
+            transform: revealed ? 'rotateY(180deg)' : 'rotateY(0deg)',
+          }}
           onClick={handleReveal}
         >
-          <div className="text-3xl text-[var(--gold)]/30 star-slow">✦</div>
-          <p className="font-typewriter text-[10px] tracking-[0.35em] text-[var(--gold)]/70 uppercase">
-            Today&apos;s Oracle
-          </p>
-          <div className="w-6 h-px bg-[var(--gold)]/20" />
-          <p className="font-typewriter text-[9px] text-[var(--text-3)]/50 tracking-wider uppercase">
-            Tap to reveal
-          </p>
-          <p className="text-xs mt-1">{moon.emoji}</p>
-        </div>
+          {/* === FRONT: Card back === */}
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-between py-5"
+            style={{
+              backfaceVisibility: 'hidden',
+              borderRadius: '10px',
+              background: 'linear-gradient(165deg, #1a1a2e 0%, #16213e 40%, #0d1b2a 100%)',
+              border: '2px solid rgba(201,169,110,0.55)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.5), 0 0 30px rgba(201,169,110,0.08), inset 0 0 40px rgba(0,0,0,0.4)',
+            }}
+          >
+            {/* Top corner number */}
+            <div className="w-full px-3 flex justify-between">
+              <span style={{fontSize: '9px', color: 'rgba(201,169,110,0.7)', fontFamily: "'Special Elite', monospace"}}>I</span>
+              <span style={{fontSize: '9px', color: 'rgba(201,169,110,0.7)', fontFamily: "'Special Elite', monospace"}}>✦</span>
+            </div>
 
-        {/* === BACK: Quote revealed === */}
-        <div
-          className="absolute inset-0 w-full min-h-[180px] flex flex-col items-center justify-center gap-3 p-5"
-          style={{
-            backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
-          }}
-        >
-          <blockquote className="font-serif text-base md:text-lg italic text-[var(--text-1)] leading-relaxed text-center">
-            &ldquo;{card.quote}&rdquo;
-          </blockquote>
+            {/* Center ornament */}
+            <div className="flex flex-col items-center gap-2">
+              <div className="relative" style={{width: 48, height: 48}}>
+                <div className="absolute inset-0 rounded-full border border-[#c9a96e]/25" />
+                <div className="absolute inset-2 rounded-full border border-[#c9a96e]/15" />
+                <div className="absolute inset-4 rounded-full border border-dashed border-[#c9a96e]/20" />
+                <div className="absolute inset-0 flex items-center justify-center text-[#c9a96e]/60 text-2xl">☾</div>
+              </div>
+              <span style={{fontSize: '7px', color: 'rgba(201,169,110,0.5)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.4em', textTransform: 'uppercase'}}>
+                The Oracle
+              </span>
+            </div>
 
-          <div className="w-8 h-px bg-[var(--gold-dim)]" />
+            {/* Bottom label */}
+            <div className="flex flex-col items-center gap-1">
+              <div style={{width: 40, height: 1, background: 'rgba(201,169,110,0.2)'}} />
+              <span style={{fontSize: '7px', color: 'rgba(201,169,110,0.4)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.2em'}}>
+                {moon.emoji} {moon.name}
+              </span>
+            </div>
+          </div>
 
-          <p className="font-typewriter text-[10px] text-[var(--gold)] tracking-[0.2em] uppercase">
-            {card.source}
-          </p>
+          {/* === BACK: Quote revealed === */}
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-between py-4 px-3"
+            style={{
+              backfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+              borderRadius: '10px',
+              background: 'linear-gradient(170deg, #f5efe3 0%, #e8dcc8 50%, #f0e6d2 100%)',
+              border: '2px solid rgba(180,160,130,0.6)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.4), inset 0 0 30px rgba(180,155,120,0.15)',
+            }}
+          >
+            {/* Top header */}
+            <div className="w-full text-center">
+              <span style={{fontSize: '8px', color: '#6a5440', fontFamily: "'Special Elite', monospace", letterSpacing: '0.3em', textTransform: 'uppercase'}}>
+                Whisper
+              </span>
+            </div>
 
-          <div className="flex items-center gap-3 mt-2">
-            <button
-              onClick={handleReset}
-              className="text-[9px] font-typewriter text-[var(--text-3)]/40 hover:text-[var(--text-3)] tracking-wider uppercase transition-colors"
-            >
-              Flip back
-            </button>
+            {/* Quote area */}
+            <div className="flex-1 flex items-center justify-center w-full">
+              <p style={{
+                fontFamily: "'Cormorant Garamond', Georgia, serif",
+                fontSize: '12px',
+                fontStyle: 'italic',
+                lineHeight: 1.5,
+                color: '#3a2e1e',
+                textAlign: 'center',
+              }}>
+                &ldquo;{card.quote}&rdquo;
+              </p>
+            </div>
+
+            {/* Divider & source */}
+            <div className="w-full flex flex-col items-center gap-1.5">
+              <div style={{width: 24, height: 1, background: '#c9a96e'}} />
+              <span style={{fontSize: '8px', color: '#8a6a4a', fontFamily: "'Special Elite', monospace", letterSpacing: '0.15em'}}>
+                {card.source}
+              </span>
+              <button
+                onClick={handleReset}
+                style={{fontSize: '7px', color: '#b0a090', fontFamily: "'Special Elite', monospace", letterSpacing: '0.2em', textTransform: 'uppercase', border: 'none', background: 'none', cursor: 'pointer', padding: 0}}
+                className="hover:text-[#6a5440] transition-colors"
+              >
+                return card
+              </button>
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
