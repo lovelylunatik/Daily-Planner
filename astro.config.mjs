@@ -5,12 +5,9 @@ import tailwind from '@astrojs/tailwind';
 export default defineConfig({
   integrations: [react(), tailwind()],
   output: 'static',
-  server: {
-    port: 4321,
-    host: '0.0.0.0',
-    allowedHosts: [
-      'sandbox-ujyvatzxkj-dailyplanner-4321.fungi.computer',
-      'fungimarketing.fungi.computer'
-    ]
+  vite: {
+    server: {
+      allowedHosts: true
+    }
   }
 });

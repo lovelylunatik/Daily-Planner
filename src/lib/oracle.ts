@@ -1,10 +1,4 @@
-
-export interface OracleCard {
-  quote: string;
-  source: string;
-  card: string;
-}
-
+export interface OracleCard { quote: string; source: string; card: string; }
 const ORACLE_CARDS: OracleCard[] = [
   { quote: "The stars are not afraid of the candle.", source: "Rumi", card: "The Candle" },
   { quote: "I told the stars about you.", source: "Unknown", card: "The Whisper" },
@@ -31,23 +25,16 @@ const ORACLE_CARDS: OracleCard[] = [
   { quote: "Throw yourself into the water if you wish to learn how to swim.", source: "Indonesian proverb", card: "The Deep" },
   { quote: "After all this time, the sun still says good morning to the flowers.", source: "Tyler Knott Gregson", card: "The Dawn" },
 ];
-
-// Deterministic daily card using date as seed
 function seededRandom(seed: string): number {
   let hash = 0;
-  for (let i = 0; i < seed.length; i++) {
-    hash = ((hash << 5) - hash) + seed.charCodeAt(i);
-    hash |= 0;
-  }
+  for (let i = 0; i < seed.length; i++) { hash = ((hash << 5) - hash) + seed.charCodeAt(i); hash |= 0; }
   const x = Math.sin(hash) * 10000;
   return x - Math.floor(x);
 }
-
 export function getCardForDate(dateStr: string): OracleCard {
   const idx = Math.floor(seededRandom(dateStr + '_oracle') * ORACLE_CARDS.length);
   return ORACLE_CARDS[idx];
 }
-
 export function getRandomCard(): OracleCard {
   return ORACLE_CARDS[Math.floor(Math.random() * ORACLE_CARDS.length)];
 }
