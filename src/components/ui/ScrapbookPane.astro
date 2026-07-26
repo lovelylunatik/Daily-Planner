@@ -8,21 +8,45 @@ interface Props {
 const { title, rotation = 0, className = '', personality = 'default' } = Astro.props;
 
 const personalityClasses: Record<string, string> = {
-  'star-chart': 'pane-star-chart paper-lift paper-grain torn-paper relative',
-  'tarot': 'pane-tarot paper-lift paper-grain filigree-frame relative',
-  'wax-seal': 'pane-wax-seal paper-lift paper-grain deckled linen relative',
-  'parchment': 'pane-parchment paper-lift paper-grain lace-frame relative',
-  'celestial': 'pane-celestial paper-lift paper-grain relative',
-  'sundial': 'pane-sundial paper-lift paper-grain sun-rays relative',
+  'star-chart': 'pane-star-chart relative',
+  'tarot': 'pane-tarot relative',
+  'wax-seal': 'pane-wax-seal relative',
+  'parchment': 'pane-parchment relative',
+  'celestial': 'pane-celestial relative',
+  'sundial': 'pane-sundial relative',
   'default': 'paper-lift paper-grain deckled linen relative',
 };
 
+// Text color per personality — inline styles for reliability
+const textColor: Record<string, string> = {
+  'star-chart': 'color:#f0e6d2;',
+  'tarot': 'color:#f0e6d2;',
+  'celestial': 'color:#f0e6d2;',
+  'sundial': 'color:#f0e6d2;',
+  'wax-seal': 'color:#2a1e14;',
+  'parchment': 'color:#3a2e1e;',
+  'default': '',
+};
+
+// Heading color per personality
+const headingColor: Record<string, string> = {
+  'star-chart': 'color:#dcc088;',
+  'tarot': 'color:#dcc088;',
+  'celestial': 'color:#a8b8d8;',
+  'sundial': 'color:#dcc088;',
+  'wax-seal': 'color:#5a4030;',
+  'parchment': 'color:#6a5440;',
+  'default': 'color:var(--text-2);',
+};
+
 const baseClass = personalityClasses[personality] || personalityClasses.default;
+const txtStyle = textColor[personality] || '';
+const hdStyle = headingColor[personality] || '';
 ---
-<div class:list={[baseClass, 'p-5', className]} style={`transform: rotate(${rotation}deg);`}>
+<div class:list={[baseClass, 'paper-lift paper-grain p-5', className]} style={`transform: rotate(${rotation}deg);`}>
   <div class="botanical-corner relative z-10">
-    <h3 class="font-typewriter text-xs tracking-[0.2em] text-[var(--text-2)] uppercase mb-3">{title}</h3>
-    <div class="font-serif text-[var(--text-1)] leading-relaxed"><slot /></div>
+    <h3 class="font-typewriter text-xs tracking-[0.2em] uppercase mb-3" style={hdStyle}>{title}</h3>
+    <div class="font-serif leading-relaxed" style={txtStyle}><slot /></div>
   </div>
 </div>
 

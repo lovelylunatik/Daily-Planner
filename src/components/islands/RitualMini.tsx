@@ -23,13 +23,11 @@ export default function RitualMini() {
               onClick={() => toggleTask(task.id)}
               className={`w-full text-left flex items-center gap-2 text-sm group py-2 px-3 ritual-strip ${carried ? 'carry-glow' : ''}`}
             >
-              <span className="wax-seal-check">
-                <span className="opacity-0 group-hover:opacity-100 text-[8px] text-[var(--gold)]">✓</span>
-              </span>
-              <span className="truncate text-[var(--text-1)] text-xs font-serif">{task.title}</span>
-              {carried && <span className="text-[10px] text-[var(--gold)]/60 ml-auto">⟳</span>}
+              <span className="wax-seal-check"><span className="opacity-0 group-hover:opacity-100 text-[8px]">✓</span></span>
+              <span className="truncate text-xs font-serif">{task.title}</span>
+              {carried && <span className="text-[10px] opacity-60 ml-auto">⟳</span>}
               {task.subTasks.length > 0 && (
-                <span className="text-[9px] font-typewriter text-[var(--text-3)] ml-auto">
+                <span className="text-[9px] font-typewriter opacity-50 ml-auto">
                   {task.subTasks.filter((s) => s.completed).length}/{task.subTasks.length}
                 </span>
               )}
@@ -39,17 +37,13 @@ export default function RitualMini() {
       </AnimatePresence>
 
       {incomplete.length > 5 && (
-        <p className="text-[9px] font-typewriter text-[var(--text-3)] tracking-wider uppercase">
+        <p className="text-[9px] font-typewriter opacity-50 tracking-wider uppercase">
           +{incomplete.length - 5} more
         </p>
       )}
 
       {incomplete.length === 0 && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="text-center py-4 text-[var(--text-3)] italic text-xs font-serif"
-        >
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-4 italic text-xs font-serif opacity-50">
           {completed.length > 0
             ? `All ${completed.length} ritual${completed.length === 1 ? '' : 's'} complete`
             : 'The altar awaits your first ritual'}
