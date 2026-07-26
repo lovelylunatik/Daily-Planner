@@ -1,10 +1,28 @@
 ---
-interface Props { title: string; rotation?: number; className?: string; }
-const { title, rotation = 0, className = '' } = Astro.props;
+interface Props { 
+  title: string; 
+  rotation?: number; 
+  className?: string;
+  personality?: 'star-chart' | 'tarot' | 'wax-seal' | 'parchment' | 'celestial' | 'sundial' | 'default';
+}
+const { title, rotation = 0, className = '', personality = 'default' } = Astro.props;
+
+const personalityClasses: Record<string, string> = {
+  'star-chart': 'pane-star-chart paper-lift paper-grain torn-paper relative',
+  'tarot': 'pane-tarot paper-lift paper-grain filigree-frame relative',
+  'wax-seal': 'pane-wax-seal paper-lift paper-grain deckled linen relative',
+  'parchment': 'pane-parchment paper-lift paper-grain lace-frame relative',
+  'celestial': 'pane-celestial paper-lift paper-grain relative',
+  'sundial': 'pane-sundial paper-lift paper-grain sun-rays relative',
+  'default': 'paper-lift paper-grain deckled linen relative',
+};
+
+const baseClass = personalityClasses[personality] || personalityClasses.default;
 ---
-<div class:list={['paper-lift paper-grain deckled linen relative p-5', className]} style={`transform: rotate(${rotation}deg); background: var(--aged);`}>
+<div class:list={[baseClass, 'p-5', className]} style={`transform: rotate(${rotation}deg);`}>
   <div class="botanical-corner relative z-10">
     <h3 class="font-typewriter text-xs tracking-[0.2em] text-[var(--text-2)] uppercase mb-3">{title}</h3>
     <div class="font-serif text-[var(--text-1)] leading-relaxed"><slot /></div>
   </div>
 </div>
+

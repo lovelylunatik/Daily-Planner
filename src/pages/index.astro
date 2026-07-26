@@ -10,39 +10,47 @@ import MoodMini from '../components/islands/MoodMini';
 <Layout title="The Oracle's Desk">
   <div class="max-w-6xl mx-auto">
     <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min">
+      <!-- Today / Calendar — Star Chart personality -->
       <a href="/week" class="contents">
-        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1">
-          <div class="text-center py-2">
+        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1" personality="star-chart">
+          <div class="text-center py-2 relative">
             <div class="font-typewriter text-3xl text-[var(--gold)]">25</div>
             <div class="font-serif text-sm text-[var(--text-2)] italic mt-1">July</div>
             <div class="font-typewriter text-[10px] tracking-wider text-[var(--text-3)] mt-2">🌖 WANING GIBBOUS</div>
             <div class="font-typewriter text-[9px] text-[var(--gold)]/60 tracking-wider mt-3 uppercase">CLICK FOR FULL CHART</div>
+            <span class="compass-star absolute top-0 right-0 text-sm opacity-40"></span>
           </div>
         </ScrapbookPane>
       </a>
 
-      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2">
+      <!-- Daily Oracle — Tarot personality -->
+      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2" personality="tarot">
         <OracleMini client:load />
       </ScrapbookPane>
 
-      <ScrapbookPane title="Today's Rituals" rotation={0.5} className="md:row-span-2">
+      <!-- Today's Rituals — Wax Seal personality -->
+      <ScrapbookPane title="Today's Rituals" rotation={0.5} className="md:row-span-2" personality="wax-seal">
         <RitualMini client:load />
         <a href="/rituals" class="block mt-4 pt-3 border-t border-[var(--text-3)]/20 font-typewriter text-[10px] text-[var(--gold)]/60 tracking-wide text-center hover:text-[var(--gold)] transition-colors uppercase">
           View full altar
         </a>
       </ScrapbookPane>
 
-      <ScrapbookPane title="Grimoire" rotation={-0.6} className="md:col-span-2">
+      <!-- Grimoire / Journal — Parchment personality -->
+      <ScrapbookPane title="Grimoire" rotation={-0.6} className="md:col-span-2" personality="parchment">
         <JournalMini client:load />
       </ScrapbookPane>
 
-      <ScrapbookPane title="The Hour" rotation={1.0}>
+      <!-- The Hour — Sun Dial personality -->
+      <ScrapbookPane title="The Hour" rotation={1.0} personality="sundial">
         <LivingClock client:load />
       </ScrapbookPane>
 
-      <ScrapbookPane title="Mood" rotation={-0.8}>
+      <!-- Mood — Celestial personality -->
+      <ScrapbookPane title="Mood" rotation={-0.8} personality="celestial">
         <MoodMini client:load />
       </ScrapbookPane>
     </div>
   </div>
 </Layout>
+
