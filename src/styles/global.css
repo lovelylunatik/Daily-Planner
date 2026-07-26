@@ -1,13 +1,19 @@
+@import "./tokens.css";
+@import "./textures.css";
 
 /* Oracle animations */
 @keyframes shuffle-spin {
   from { transform: rotate(0deg) scale(1); }
   to { transform: rotate(360deg) scale(1.2); }
 }
-.shuffle-spin { animation: shuffle-spin 1.2s linear infinite; }
+.shuffle-spin {
+  animation: shuffle-spin 1.2s linear infinite;
+}
 
 @keyframes fade-in {
   from { opacity: 0; transform: scale(0.96); }
   to { opacity: 1; transform: scale(1); }
 }
-.fade-in { animation: fade-in 0.5s ease-out forwards; }
+.fade-in {
+  animation: fade-in 0.5s ease-out forwards;
+}
