@@ -172,13 +172,7 @@ export default function LivingClock() {
         }}/>
       </div>
 
-      {/* Moon + Zodiac caption */}
-      <div className="flex items-center justify-center gap-2 text-[9px] font-typewriter mt-1" style={{color:'rgba(201,169,110,0.45)', letterSpacing:'0.12em'}}>
-        <span>{moon.emoji}</span>
-        <span>{moon.name}</span>
-        <span style={{opacity:0.3}}>·</span>
-        <span>{zodiac.symbol}</span>
-      </div>
+
     </div>
   );
 }
