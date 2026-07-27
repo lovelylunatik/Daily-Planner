@@ -202,7 +202,7 @@ export default function CalendarGrid() {
                     <div className="mt-auto pt-1.5 space-y-0.5">
                       {dayEvents.map((e) => (
                         <div key={e.id} className="flex items-center gap-1 min-w-0">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: typeColor[e.type] || '#9c4a5a' }} />
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: typeColor[e.type] || '#d84556' }} />
                           <span className="text-[8px] leading-tight" style={{ opacity: 0.6 }}>{typeIcon[e.type] || '•'}</span>
                           {e.time && <span className="text-[7px] font-typewriter tabular-nums leading-tight" style={{ color: 'rgba(58,46,31,0.5)' }}>{e.time}</span>}
                           <span className="text-[8px] font-serif italic truncate leading-tight" style={{ color: 'rgba(58,46,31,0.8)' }}>{e.title}</span>
