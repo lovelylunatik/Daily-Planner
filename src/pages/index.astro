@@ -225,7 +225,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   }
   .paper-pin {
     position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
-    width: 7px; height: 7px; border-radius: 50%;
     background: radial-gradient(circle at 35% 35%, var(--gold), #8a6828);
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
@@ -259,7 +258,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     left: 26%;
     width: 192px;
     height: 192px;
-    border-radius: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -268,35 +266,13 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     background:
       radial-gradient(circle at 50% 50%, rgba(140,70,70,0.35) 0%, rgba(90,40,40,0.42) 60%, rgba(60,25,25,0.38) 100%);
     border: 2px solid rgba(201,169,110,0.32);
+    clip-path: polygon(50% 0%, 62% 28%, 95% 15%, 76% 48%, 100% 50%, 76% 52%, 95% 85%, 62% 72%, 50% 100%, 38% 72%, 5% 85%, 24% 52%, 0% 50%, 24% 48%, 5% 15%, 38% 28%);
     box-shadow:
       inset 0 0 30px rgba(140,80,80,0.20),
       0 6px 20px rgba(0,0,0,0.30),
       0 0 18px rgba(201,169,110,0.08);
     z-index: 7;
   }
-  .mood-strip::before {
-    content: "";
-    position: absolute;
-    inset: -16px;
-    border-radius: 50%;
-    background: repeating-conic-gradient(
-      transparent 0deg 10deg,
-      rgba(201,169,110,0.14) 10deg 13deg,
-      transparent 13deg 15deg
-    );
-    z-index: -1;
-    animation: sun-rotate 50s linear infinite;
-  }
-  .mood-strip::after {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px solid rgba(201,169,110,0.18);
-    z-index: -1;
-  }
-
-  /* ── DATE TICKET ── */
   .date-ticket {
     bottom: 6%;
     right: 6%;
@@ -310,7 +286,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     text-align: center; min-width: 85px;
   }
   .ticket-stub::before { content: ''; position: absolute; inset: 3px; border: 1px dashed rgba(120,170,160,0.1); pointer-events: none; }
-  .ticket-notch { position: absolute; width: 12px; height: 12px; background: #0f172a; border-radius: 50%; top: 50%; transform: translateY(-50%); }
   .ticket-notch-left { left: -6px; }
   .ticket-notch-right { right: -6px; }
   .ticket-divider { height: 1px; background: repeating-linear-gradient(90deg, rgba(120,170,160,0.2) 0, rgba(120,170,160,0.2) 4px, transparent 4px, transparent 6px); margin: 0.4rem 0; }
@@ -364,7 +339,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     right: 18%;
     width: 50px; height: 50px; opacity: 0.2;
     background: radial-gradient(circle, transparent 30%, rgba(240,230,210,0.15) 31%, rgba(240,230,210,0.15) 34%, transparent 35%, transparent 44%, rgba(240,230,210,0.12) 45%, rgba(240,230,210,0.12) 48%, transparent 49%);
-    border-radius: 50%;
     transform: rotate(15deg);
     z-index: 1;
   }
@@ -374,7 +348,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     top: 48%;
     left: 42%;
     width: 42px; height: 42px;
-    border-radius: 50%;
     border: 2px solid rgba(120,90,60,0.12);
     box-shadow: inset 0 0 8px rgba(120,90,60,0.08), 0 0 0 5px rgba(120,90,60,0.03), 0 0 0 10px rgba(120,90,60,0.02);
     opacity: 0.6;
@@ -425,8 +398,6 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   }
 
   /* ── Mobile ── */
-@keyframes sun-rotate {
-    from { transform: rotate(0deg); }
     to { transform: rotate(360deg); }
   }
   @media (max-width: 768px) {
