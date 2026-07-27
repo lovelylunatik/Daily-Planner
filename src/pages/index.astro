@@ -11,186 +11,187 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
 <Layout title="The Oracle's Desk">
   <WhimsyDecorations />
 
-  <!-- No-scroll scrapbook desk -->
-  <div class="desk-surface relative w-full flex items-center justify-center" style="height:calc(100vh - 3.5rem); padding:0.5rem;">
+  <!-- Scrapbook desk: no grid, no rigid container — items float freely -->
+  <div class="desk-surface relative w-full" style="height:calc(100vh - 3.5rem); overflow:hidden;">
     
-    <div class="collage relative">
-      
-      <!-- TAROT CARD: ORACLE (top-left, angled) -->
-      <a href="/oracle" class="desk-item oracle-card" aria-label="Daily Oracle">
-        <OracleMini client:load />
-      </a>
-      
-      <!-- ORNATE CLOCK (top-center) -->
-      <div class="desk-item clock-face">
-        <LivingClock client:load />
-      </div>
-      
-      <!-- RITUAL ALTAR: torn paper stack (top-right) -->
-      <a href="/rituals" class="desk-item ritual-stack" aria-label="Today's Rituals">
-        <div class="ritual-paper ritual-paper-1">
-          <span class="paper-pin"></span>
-          <p class="font-typewriter text-[9px] tracking-wider uppercase mb-2" style="color:rgba(201,169,110,0.6);">Altar</p>
-          <RitualMini client:load />
-        </div>
-        <div class="ritual-paper ritual-paper-2"></div>
-        <div class="ritual-paper ritual-paper-3"></div>
-      </a>
-      
-      <!-- GRIMOIRE: open book (center, large) -->
-      <a href="/journal" class="desk-item grimoire-page" aria-label="Grimoire">
-        <div class="book-page left-page">
-          <div class="page-margin">
-            <p class="font-typewriter text-[8px] tracking-[0.25em] uppercase mb-1" style="color:rgba(240,230,210,0.3);">Entry</p>
-            <JournalMini client:load />
-          </div>
-        </div>
-        <div class="book-page right-page">
-          <div class="page-margin flex flex-col items-center justify-center h-full gap-2">
-            <div class="w-12 h-12 rounded-full border border-dashed flex items-center justify-center" style="border-color:rgba(201,169,110,0.15);">
-              <span class="font-serif text-xl italic" style="color:rgba(201,169,110,0.25);">✦</span>
-            </div>
-            <p class="font-serif text-xs italic text-center leading-relaxed" style="color:rgba(240,230,210,0.4);">
-              Record your intentions<br/>beneath the stars
-            </p>
-            <span class="font-typewriter text-[7px] tracking-[0.2em] uppercase" style="color:rgba(201,169,110,0.3);">Write</span>
-          </div>
-        </div>
-        <div class="book-spine"></div>
-      </a>
-      
-      <!-- MOOD STRIP (below grimoire) -->
-      <div class="desk-item mood-strip">
-        <MoodMini client:load />
-      </div>
-      
-      <!-- DATE TICKET (bottom-right) -->
-      <a href="/week" class="desk-item date-ticket" aria-label="View calendar">
-        <div class="ticket-stub">
-          <div class="ticket-notch ticket-notch-left"></div>
-          <div class="ticket-notch ticket-notch-right"></div>
-          <span class="font-typewriter text-[7px] tracking-[0.3em] uppercase block mb-1" style="color:rgba(201,169,110,0.4);">Today</span>
-          <span class="font-typewriter text-3xl leading-none" style="color:var(--gold);">24</span>
-          <span class="font-serif text-xs italic mt-0.5 block" style="color:var(--text-2);">July</span>
-          <span class="font-typewriter text-[7px] tracking-wider mt-1 block" style="color:rgba(240,230,210,0.35);">🌖 Waning Gibbous</span>
-          <div class="ticket-divider"></div>
-          <span class="font-typewriter text-[6px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.25);">Chart</span>
-        </div>
-      </a>
-      
-      <!-- DECORATIVE MOONS (bottom-left) -->
-      <div class="desk-item deco-moons" aria-hidden="true">
-        <svg viewBox="0 0 80 80" class="moon-svg moon-gold">
-          <path d="M45 8 A32 32 0 1 1 20 68 A24 24 0 1 0 45 8Z" fill="currentColor" stroke="rgba(201,169,110,0.4)" strokeWidth="0.5"/>
-          <circle cx="22" cy="28" r="1.5" fill="rgba(201,169,110,0.3)"/>
-          <circle cx="16" cy="42" r="2" fill="rgba(201,169,110,0.2)"/>
-        </svg>
-        <svg viewBox="0 0 70 70" class="moon-svg moon-sage">
-          <path d="M42 10 A28 28 0 1 1 18 60 A20 20 0 1 0 42 10Z" fill="currentColor" stroke="rgba(140,170,120,0.4)" strokeWidth="0.5"/>
-          <circle cx="20" cy="30" r="1.5" fill="rgba(140,170,120,0.4)"/>
-        </svg>
-        <svg viewBox="0 0 55 55" class="moon-svg moon-teal">
-          <path d="M32 6 A22 22 0 1 1 14 46 A16 16 0 1 0 32 6Z" fill="currentColor" stroke="rgba(120,170,160,0.4)" strokeWidth="0.5"/>
-        </svg>
-        <svg viewBox="0 0 40 40" class="moon-svg moon-rose">
-          <path d="M22 5 A16 16 0 1 1 10 33 A12 12 0 1 0 22 5Z" fill="currentColor" stroke="rgba(190,120,130,0.4)" strokeWidth="0.5"/>
-        </svg>
-        <svg viewBox="0 0 30 30" class="moon-svg moon-ochre">
-          <path d="M18 3 A12 12 0 1 1 6 24 A8 8 0 1 0 18 3Z" fill="currentColor"/>
-        </svg>
-        <svg viewBox="0 0 24 24" class="moon-svg moon-star">
-          <text x="3" y="18" fontSize="16" fill="currentColor">✦</text>
-        </svg>
-      </div>
-      
-      <!-- More scrapbook textures and colors -->
-      <!-- Sage washi tape -->
-      <div class="desk-item washi-tape tape-sage" aria-hidden="true"></div>
-      <!-- Terracotta washi tape -->
-      <div class="desk-item washi-tape tape-terracotta" aria-hidden="true"></div>
-      <!-- Dusty blue washi tape -->
-      <div class="desk-item washi-tape tape-dustyblue" aria-hidden="true"></div>
-      
-      <!-- Lace doily corner -->
-      <div class="desk-item lace-doily" aria-hidden="true"></div>
-      
-      <!-- Coffee ring stain -->
-      <div class="desk-item coffee-stain" aria-hidden="true"></div>
-      
-      <!-- Handwritten annotation -->
-      <div class="desk-item handwritten-note" aria-hidden="true">
-        <span class="font-serif text-[8px] italic" style="color:rgba(140,110,80,0.4);">remember</span>
-      </div>
-      
-      <!-- Pressed flower -->
-      <div class="desk-item pressed-flower" aria-hidden="true">✿</div>
-      
-      <!-- Botanical corner stamp -->
-      <div class="desk-item botanical-stamp" aria-hidden="true">
-        <svg viewBox="0 0 40 40" width="32" height="32">
-          <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(120,160,100,0.25)" strokeWidth="1" strokeDasharray="2,1"/>
-          <text x="20" y="23" textAnchor="middle" fontSize="10" fill="rgba(120,160,100,0.3)">✦</text>
-        </svg>
-      </div>
-      
-      <!-- Thread connecting elements -->
-      <svg class="desk-item connecting-thread" viewBox="0 0 200 120" aria-hidden="true">
-        <path d="M10 80 Q60 20 120 60 T190 30" fill="none" stroke="rgba(201,169,110,0.15)" strokeWidth="0.8" strokeDasharray="3,2"/>
-      </svg>
-      
+    <!-- TAROT CARD: Oracle — top-left, angled on the velvet -->
+    <a href="/oracle" class="desk-piece oracle-card" aria-label="Daily Oracle">
+      <OracleMini client:load />
+    </a>
+    
+    <!-- ORNATE CLOCK — upper-center, slightly elevated like it's on a pedestal -->
+    <div class="desk-piece clock-face">
+      <LivingClock client:load />
     </div>
+    
+    <!-- RITUAL ALTAR — torn-paper stack, upper-right, slightly messy -->
+    <a href="/rituals" class="desk-piece ritual-stack" aria-label="Today's Rituals">
+      <div class="ritual-paper ritual-paper-1">
+        <span class="paper-pin"></span>
+        <p class="font-typewriter text-[9px] tracking-wider uppercase mb-2" style="color:rgba(201,169,110,0.6);">Altar</p>
+        <RitualMini client:load />
+      </div>
+      <div class="ritual-paper ritual-paper-2"></div>
+      <div class="ritual-paper ritual-paper-3"></div>
+    </a>
+    
+    <!-- GRIMOIRE — open book at center stage, lying flat -->
+    <a href="/journal" class="desk-piece grimoire-page" aria-label="Grimoire">
+      <div class="book-page left-page">
+        <div class="page-margin">
+          <p class="font-typewriter text-[8px] tracking-[0.25em] uppercase mb-1" style="color:rgba(240,230,210,0.3);">Entry</p>
+          <JournalMini client:load />
+        </div>
+      </div>
+      <div class="book-page right-page">
+        <div class="page-margin flex flex-col items-center justify-center h-full gap-2">
+          <div class="w-12 h-12 rounded-full border border-dashed flex items-center justify-center" style="border-color:rgba(201,169,110,0.15);">
+            <span class="font-serif text-xl italic" style="color:rgba(201,169,110,0.25);">✦</span>
+          </div>
+          <p class="font-serif text-xs italic text-center leading-relaxed" style="color:rgba(240,230,210,0.4);">
+            Record your intentions<br/>beneath the stars
+          </p>
+          <span class="font-typewriter text-[7px] tracking-[0.2em] uppercase" style="color:rgba(201,169,110,0.3);">Write</span>
+        </div>
+      </div>
+      <div class="book-spine"></div>
+    </a>
+    
+    <!-- MOOD STRIP — floating below grimoire, angled like a forgotten ribbon -->
+    <div class="desk-piece mood-strip">
+      <MoodMini client:load />
+    </div>
+    
+    <!-- DATE TICKET — bottom-right, like a loose ticket stub -->
+    <a href="/week" class="desk-piece date-ticket" aria-label="View calendar">
+      <div class="ticket-stub">
+        <div class="ticket-notch ticket-notch-left"></div>
+        <div class="ticket-notch ticket-notch-right"></div>
+        <span class="font-typewriter text-[7px] tracking-[0.3em] uppercase block mb-1" style="color:rgba(201,169,110,0.4);">Today</span>
+        <span class="font-typewriter text-3xl leading-none" style="color:var(--gold);">24</span>
+        <span class="font-serif text-xs italic mt-0.5 block" style="color:var(--text-2);">July</span>
+        <span class="font-typewriter text-[7px] tracking-wider mt-1 block" style="color:rgba(240,230,210,0.35);">🌖 Waning Gibbous</span>
+        <div class="ticket-divider"></div>
+        <span class="font-typewriter text-[6px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.25);">Chart</span>
+      </div>
+    </a>
+    
+    <!-- DECORATIVE MOONS — scattered in lower-left near edge -->
+    <div class="desk-piece deco-moons" aria-hidden="true">
+      <svg viewBox="0 0 80 80" class="moon-svg moon-gold">
+        <path d="M45 8 A32 32 0 1 1 20 68 A24 24 0 1 0 45 8Z" fill="currentColor" stroke="rgba(201,169,110,0.4)" strokeWidth="0.5"/>
+        <circle cx="22" cy="28" r="1.5" fill="rgba(201,169,110,0.3)"/>
+        <circle cx="16" cy="42" r="2" fill="rgba(201,169,110,0.2)"/>
+      </svg>
+      <svg viewBox="0 0 70 70" class="moon-svg moon-sage">
+        <path d="M42 10 A28 28 0 1 1 18 60 A20 20 0 1 0 42 10Z" fill="currentColor" stroke="rgba(140,170,120,0.4)" strokeWidth="0.5"/>
+        <circle cx="20" cy="30" r="1.5" fill="rgba(140,170,120,0.4)"/>
+      </svg>
+      <svg viewBox="0 0 55 55" class="moon-svg moon-teal">
+        <path d="M32 6 A22 22 0 1 1 14 46 A16 16 0 1 0 32 6Z" fill="currentColor" stroke="rgba(120,170,160,0.4)" strokeWidth="0.5"/>
+      </svg>
+      <svg viewBox="0 0 40 40" class="moon-svg moon-rose">
+        <path d="M22 5 A16 16 0 1 1 10 33 A12 12 0 1 0 22 5Z" fill="currentColor" stroke="rgba(190,120,130,0.4)" strokeWidth="0.5"/>
+      </svg>
+      <svg viewBox="0 0 30 30" class="moon-svg moon-ochre">
+        <path d="M18 3 A12 12 0 1 1 6 24 A8 8 0 1 0 18 3Z" fill="currentColor"/>
+      </svg>
+      <svg viewBox="0 0 24 24" class="moon-svg moon-star">
+        <text x="3" y="18" fontSize="16" fill="currentColor">✦</text>
+      </svg>
+    </div>
+    
+    <!-- Washi tape strips — stuck randomly -->
+    <div class="desk-piece washi-tape tape-sage" aria-hidden="true"></div>
+    <div class="desk-piece washi-tape tape-terracotta" aria-hidden="true"></div>
+    <div class="desk-piece washi-tape tape-dustyblue" aria-hidden="true"></div>
+    
+    <!-- Lace doily peeking from edge -->
+    <div class="desk-piece lace-doily" aria-hidden="true"></div>
+    
+    <!-- Coffee stain near center -->
+    <div class="desk-piece coffee-stain" aria-hidden="true"></div>
+    
+    <!-- Handwritten note -->
+    <div class="desk-piece handwritten-note" aria-hidden="true">
+      <span class="font-serif text-[8px] italic" style="color:rgba(140,110,80,0.4);">remember</span>
+    </div>
+    
+    <!-- Pressed flower in upper-left corner -->
+    <div class="desk-piece pressed-flower" aria-hidden="true">✿</div>
+    
+    <!-- Botanical corner stamp -->
+    <div class="desk-piece botanical-stamp" aria-hidden="true">
+      <svg viewBox="0 0 40 40" width="32" height="32">
+        <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(120,160,100,0.25)" strokeWidth="1" strokeDasharray="2,1"/>
+        <text x="20" y="23" textAnchor="middle" fontSize="10" fill="rgba(120,160,100,0.3)">✦</text>
+      </svg>
+    </div>
+    
+    <!-- Connecting gold thread — arcs between elements -->
+    <svg class="desk-piece connecting-thread" viewBox="0 0 200 120" aria-hidden="true">
+      <path d="M10 80 Q60 20 120 60 T190 30" fill="none" stroke="rgba(201,169,110,0.15)" strokeWidth="0.8" strokeDasharray="3,2"/>
+    </svg>
+    
   </div>
 </Layout>
 
 <style>
-  /* ── No-scroll desk ── */
+  /* ── DESK SURFACE: rich velvet + subtle wood grain ── */
   .desk-surface {
     background:
-      radial-gradient(ellipse at 55% 40%, rgba(201,169,110,0.03) 0%, transparent 50%),
-      radial-gradient(ellipse at 15% 85%, rgba(140,170,120,0.025) 0%, transparent 40%),
-      radial-gradient(ellipse at 80% 80%, rgba(176,112,120,0.02) 0%, transparent 35%);
+      /* Subtle dark wood grain from center */
+      repeating-linear-gradient(90deg, rgba(15,23,42,0.98) 0px, rgba(20,28,48,0.96) 1px, rgba(15,23,42,0.98) 3px),
+      /* Golden ambient glow from upper center */
+      radial-gradient(ellipse at 50% 30%, rgba(201,169,110,0.06) 0%, transparent 55%),
+      /* Lavender corner glow */
+      radial-gradient(ellipse at 15% 85%, rgba(168,149,182,0.035) 0%, transparent 40%),
+      /* Rose corner glow */
+      radial-gradient(ellipse at 85% 75%, rgba(176,112,120,0.03) 0%, transparent 35%),
+      /* Deep space base */
+      linear-gradient(170deg, #0a0f1c 0%, #0f172a 40%, #0d1525 100%);
   }
-  
-  .collage {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    gap: 0.5rem;
-    width: min(1000px, 96vw);
-    height: calc(100vh - 5rem);
-    max-height: 720px;
-  }
-  
-  .desk-item { position: relative; transition: transform 0.35s ease, filter 0.35s ease; }
-  .desk-item:hover { transform: translateY(-2px) rotate(var(--hover-rotate, 0deg)); filter: brightness(1.1); z-index: 20; }
 
-  /* Oracle */
+  /* ── DESK PIECES: absolute-positioned, free-floating ── */
+  .desk-piece {
+    position: absolute;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.35s ease;
+  }
+  .desk-piece:hover {
+    transform: translateY(-3px) scale(1.02);
+    filter: brightness(1.08);
+    z-index: 50;
+  }
+
+  /* ── ORACLE TAROT CARD ── */
   .oracle-card {
-    grid-column: 1 / 3; grid-row: 1 / 3;
-    justify-self: start; align-self: start;
-    transform: rotate(-3.5deg);
-    --hover-rotate: -1.5deg;
-    margin-top: 0.25rem; margin-left: 0.5rem;
+    top: 6%;
+    left: 5%;
+    width: 200px;
+    transform: rotate(-4deg);
+    z-index: 10;
   }
   .oracle-card > :global(*) { background: none !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
 
-  /* Clock */
+  /* ── ORNATE CLOCK ── */
   .clock-face {
-    grid-column: 3 / 5; grid-row: 1 / 3;
-    justify-self: center; align-self: start;
-    transform: rotate(1deg);
-    --hover-rotate: 0deg;
-    margin-top: 0.5rem;
+    top: 4%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0.5deg);
+    z-index: 8;
+  }
+  .clock-face:hover {
+    transform: translateX(-50%) translateY(-3px) scale(1.02);
   }
 
-  /* Ritual stack */
+  /* ── RITUAL PAPER STACK ── */
   .ritual-stack {
-    grid-column: 5 / 8; grid-row: 1 / 3;
-    justify-self: end; align-self: start;
-    transform: rotate(2deg);
-    --hover-rotate: 0.5deg;
-    width: 240px; height: 240px;
-    margin-top: 0.25rem; margin-right: 0.5rem;
+    top: 8%;
+    right: 5%;
+    width: 240px;
+    height: 240px;
+    transform: rotate(2.5deg);
+    z-index: 9;
   }
   .ritual-paper {
     position: absolute; inset: 0;
@@ -210,14 +211,14 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   }
   .ritual-paper-2 {
     z-index: 2;
-    transform: translate(5px, 7px) rotate(1.5deg);
+    transform: translate(6px, 8px) rotate(1.5deg);
     background: rgba(168,149,182,0.04);
     border: 1px solid rgba(168,149,182,0.08);
     opacity: 0.55;
   }
   .ritual-paper-3 {
     z-index: 1;
-    transform: translate(-3px, 10px) rotate(-1.5deg);
+    transform: translate(-4px, 12px) rotate(-1.5deg);
     background: rgba(140,170,120,0.03);
     border: 1px solid rgba(140,170,120,0.06);
     opacity: 0.35;
@@ -225,19 +226,21 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .paper-pin {
     position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
     width: 7px; height: 7px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, #c9a96e, #8a6828);
+    background: radial-gradient(circle at 35% 35%, var(--gold), #8a6828);
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
   }
 
-  /* Open book */
+  /* ── OPEN GRIMOIRE BOOK ── */
   .grimoire-page {
-    grid-column: 1 / 6; grid-row: 2 / 5;
-    justify-self: center; align-self: center;
+    top: 42%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(-0.5deg);
     display: flex;
-    transform: rotate(-0.3deg);
-    --hover-rotate: 0.3deg;
-    width: 100%; max-width: 520px; height: 220px;
+    width: 520px; max-width: 90vw; height: 220px;
     z-index: 5;
+  }
+  .grimoire-page:hover {
+    transform: translateX(-50%) translateY(calc(-50% - 3px)) rotate(-0.3deg) scale(1.02);
   }
   .book-page {
     flex: 1; height: 100%; position: relative;
@@ -249,26 +252,25 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .page-margin { padding: 0.875rem 0.75rem; height: 100%; }
   .book-spine { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(to right, rgba(201,169,110,0.1), rgba(201,169,110,0.25), rgba(201,169,110,0.1)); z-index: 10; box-shadow: 0 0 8px rgba(0,0,0,0.3); }
 
-  /* Mood strip */
+  /* ── MOOD STRIP ── */
   .mood-strip {
-    grid-column: 2 / 5; grid-row: 5 / 6;
-    justify-self: center; align-self: end;
-    transform: rotate(0.6deg);
-    --hover-rotate: 0deg;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%) rotate(0.8deg);
     padding: 0.4rem 1.25rem;
     background: linear-gradient(170deg, rgba(168,149,182,0.04) 0%, rgba(14,24,48,0.18) 100%);
     border: 1px solid rgba(168,149,182,0.1);
     clip-path: polygon(0% 4%,3% 0%,8% 3%,15% 1%,22% 4%,30% 2%,38% 5%,46% 2%,54% 4%,62% 1%,70% 3%,78% 0%,86% 2%,92% 4%,100% 1%,100% 96%,96% 100%,90% 97%,82% 99%,74% 96%,66% 98%,58% 95%,50% 97%,42% 99%,34% 96%,26% 98%,18% 95%,10% 97%,4% 99%,0% 95%);
     backdrop-filter: blur(2px);
+    z-index: 7;
   }
 
-  /* Ticket */
+  /* ── DATE TICKET ── */
   .date-ticket {
-    grid-column: 5 / 7; grid-row: 4 / 6;
-    justify-self: end; align-self: end;
+    bottom: 6%;
+    right: 6%;
     transform: rotate(-2.5deg);
-    --hover-rotate: -1deg;
-    margin-bottom: 0.25rem; margin-right: 0.5rem;
+    z-index: 6;
   }
   .ticket-stub {
     position: relative; padding: 0.75rem 1.1rem;
@@ -282,11 +284,13 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .ticket-notch-right { right: -6px; }
   .ticket-divider { height: 1px; background: repeating-linear-gradient(90deg, rgba(120,170,160,0.2) 0, rgba(120,170,160,0.2) 4px, transparent 4px, transparent 6px); margin: 0.4rem 0; }
 
-  /* Bold colored moons */
+  /* ── DECORATIVE MOONS ── */
   .deco-moons {
-    grid-column: 1 / 3; grid-row: 4 / 6;
-    justify-self: start; align-self: end;
-    position: relative; width: 160px; height: 120px; pointer-events: none;
+    bottom: 4%;
+    left: 3%;
+    width: 160px; height: 120px;
+    pointer-events: none;
+    z-index: 2;
   }
   .moon-svg { position: absolute; filter: drop-shadow(0 0 8px currentColor); }
   .moon-gold { width: 68px; height: 68px; color: rgba(201,169,110,0.35); bottom: 0; left: 0; transform: rotate(-22deg); }
@@ -296,90 +300,119 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .moon-ochre { width: 20px; height: 20px; color: rgba(200,160,80,0.3); bottom: 2px; left: 122px; transform: rotate(-18deg); }
   .moon-star { width: 18px; height: 18px; color: rgba(201,169,110,0.35); bottom: 54px; left: 58px; }
 
-  /* Washi tape varieties */
-  .washi-tape { position: absolute; pointer-events: none; }
+  /* ── WASHI TAPE ── */
+  .washi-tape { pointer-events: none; z-index: 3; }
   .tape-sage {
-    grid-column: 2 / 4; grid-row: 1 / 2; align-self: start; justify-self: center;
+    top: 2%;
+    left: 32%;
     width: 60px; height: 14px; opacity: 0.35;
     background: rgba(140,170,120,0.25);
     background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.15) 3px, rgba(255,255,255,0.15) 5px);
-    transform: rotate(-24deg) translateY(-2px);
+    transform: rotate(-24deg);
   }
   .tape-terracotta {
-    grid-column: 6 / 8; grid-row: 2 / 3; align-self: start; justify-self: end;
-    width: 50px; height: 14px; opacity: 0.3;
+    top: 18%;
+    right: 2%;
+    width: 55px; height: 14px; opacity: 0.3;
     background: rgba(190,120,100,0.2);
     background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
     background-size: 6px 6px;
-    transform: rotate(18deg) translateX(12px);
+    transform: rotate(18deg);
   }
   .tape-dustyblue {
-    grid-column: 1 / 2; grid-row: 3 / 4; align-self: center; justify-self: start;
+    top: 35%;
+    left: 1%;
     width: 45px; height: 12px; opacity: 0.28;
     background: rgba(140,160,190,0.2);
     background-image: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.1) 4px, rgba(255,255,255,0.1) 5px);
-    transform: rotate(-35deg) translateX(-6px);
+    transform: rotate(-35deg);
   }
 
-  /* Lace doily corner */
+  /* ── LACE DOILY ── */
   .lace-doily {
-    grid-column: 6 / 7; grid-row: 3 / 4; justify-self: end; align-self: start;
+    bottom: 12%;
+    right: 18%;
     width: 50px; height: 50px; opacity: 0.2;
     background: radial-gradient(circle, transparent 30%, rgba(240,230,210,0.15) 31%, rgba(240,230,210,0.15) 34%, transparent 35%, transparent 44%, rgba(240,230,210,0.12) 45%, rgba(240,230,210,0.12) 48%, transparent 49%);
     border-radius: 50%;
     transform: rotate(15deg);
+    z-index: 1;
   }
 
-  /* Coffee stain */
+  /* ── COFFEE STAIN ── */
   .coffee-stain {
-    grid-column: 3 / 4; grid-row: 3 / 4; justify-self: center; align-self: end;
-    width: 38px; height: 38px;
+    top: 48%;
+    left: 42%;
+    width: 42px; height: 42px;
     border-radius: 50%;
     border: 2px solid rgba(120,90,60,0.12);
     box-shadow: inset 0 0 8px rgba(120,90,60,0.08), 0 0 0 5px rgba(120,90,60,0.03), 0 0 0 10px rgba(120,90,60,0.02);
     opacity: 0.6;
-    transform: rotate(-10deg) translateY(8px);
+    transform: rotate(-10deg);
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* Handwritten note */
+  /* ── HANDWRITTEN NOTE ── */
   .handwritten-note {
-    grid-column: 5 / 6; grid-row: 3 / 4; justify-self: center; align-self: end;
-    transform: rotate(8deg) translateY(6px);
+    top: 28%;
+    left: 62%;
+    transform: rotate(8deg);
     padding: 0.15rem 0.4rem;
     background: rgba(240,230,210,0.03);
     border-bottom: 0.5px solid rgba(140,110,80,0.15);
     pointer-events: none;
+    z-index: 1;
   }
 
-  /* Pressed flower */
+  /* ── PRESSED FLOWER ── */
   .pressed-flower {
-    grid-column: 1 / 2; grid-row: 2 / 3; justify-self: start; align-self: center;
+    top: 2%;
+    left: 22%;
     font-size: 1.2rem; opacity: 0.3; filter: sepia(0.7);
-    transform: rotate(-14deg) translate(-6px, 4px); pointer-events: none;
+    transform: rotate(-14deg);
+    pointer-events: none;
+    z-index: 1;
   }
 
-  /* Botanical stamp */
+  /* ── BOTANICAL STAMP ── */
   .botanical-stamp {
-    grid-column: 6 / 7; grid-row: 1 / 2; justify-self: end; align-self: end;
-    transform: rotate(22deg) translate(-4px, 8px); pointer-events: none;
+    bottom: 18%;
+    right: 30%;
+    transform: rotate(22deg);
+    pointer-events: none;
+    z-index: 1;
   }
 
-  /* Connecting thread */
+  /* ── CONNECTING THREAD ── */
   .connecting-thread {
-    grid-column: 1 / 5; grid-row: 2 / 4;
-    justify-self: start; align-self: start;
+    top: 40%;
+    left: 10%;
     width: 200px; height: 100px;
-    pointer-events: none; opacity: 0.5; z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 0;
   }
 
   /* ── Mobile ── */
   @media (max-width: 768px) {
-    .collage { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; height: auto; max-height: none; overflow-y: auto; padding-bottom: 2rem; }
-    .desk-item { position: relative; grid-column: auto !important; grid-row: auto !important; justify-self: center !important; align-self: center !important; margin: 0 !important; transform: none !important; width: 100%; max-width: 300px; }
-    .grimoire-page { flex-direction: column; height: auto; max-width: 300px; }
-    .right-page { display: none; }
-    .book-spine { display: none; }
+    .desk-piece {
+      position: relative;
+      top: auto !important; left: auto !important; right: auto !important; bottom: auto !important;
+      transform: none !important;
+      width: 100%; max-width: 320px;
+      margin: 0 auto 1rem;
+    }
+    .desk-piece:hover {
+      transform: translateY(-2px) scale(1.01) !important;
+    }
+    .desk-surface { overflow-y: auto; padding: 1rem 0; display: flex; flex-direction: column; gap: 1rem; height: auto !important; min-height: calc(100vh - 3.5rem); }
     .deco-moons, .washi-tape, .pressed-flower, .lace-doily, .coffee-stain, .handwritten-note, .botanical-stamp, .connecting-thread { display: none; }
+    .clock-face { order: -1; }
+    .oracle-card { order: 1; }
+    .ritual-stack { order: 2; }
+    .grimoire-page { order: 3; }
+    .mood-strip { order: 4; }
+    .date-ticket { order: 5; }
   }
 </style>
