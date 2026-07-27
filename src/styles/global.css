@@ -114,3 +114,12 @@ main {
     radial-gradient(ellipse at 82% 12%, rgba(80,130,130,0.05) 0%, transparent 30%) !important;
 }
 
+
+/* ── Parchment text colors for light paper backgrounds ── */
+.parchment-page,
+.parchment-page * {
+  color: #3a2e1f !important;
+}
+.parchment-page ::placeholder {
+  color: rgba(58,46,31,0.35) !important;
+}
