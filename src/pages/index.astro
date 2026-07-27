@@ -254,15 +254,16 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
 
   /* ── MOOD STRIP ── */
   .mood-strip {
-    top: 75%;
-    left: 50%;
-    transform: translateX(-50%) rotate(0.8deg);
-    padding: 0.4rem 1.25rem;
-    background: linear-gradient(170deg, linear-gradient(170deg, rgba(208,196,176,0.75) 0%, rgba(192,178,160,0.7) 100%) 0%, rgba(14,24,48,0.18) 100%);
-    border: 1px solid rgba(168,149,182,0.1);
+    top: 72%;
+    left: 28%;
+    transform: rotate(0.8deg);
+    padding: 0.5rem 0.75rem;
+    background: linear-gradient(170deg, rgba(168,149,182,0.06) 0%, rgba(14,24,48,0.20) 100%);
+    border: 1px solid rgba(168,149,182,0.12);
     clip-path: polygon(0% 4%,3% 0%,8% 3%,15% 1%,22% 4%,30% 2%,38% 5%,46% 2%,54% 4%,62% 1%,70% 3%,78% 0%,86% 2%,92% 4%,100% 1%,100% 96%,96% 100%,90% 97%,82% 99%,74% 96%,66% 98%,58% 95%,50% 97%,42% 99%,34% 96%,26% 98%,18% 95%,10% 97%,4% 99%,0% 95%);
     backdrop-filter: blur(2px);
     z-index: 7;
+    min-width: 160px;
   }
 
   /* ── DATE TICKET ── */
