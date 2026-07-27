@@ -48,17 +48,17 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
       <MoodMini client:load />
     </div>
     
-    <!-- DATE TICKET — bottom-right, larger vintage ticket stub -->
+    <!-- DATE TICKET — muted maroon, near grimoire -->
     <a href="/week" class="desk-piece date-ticket" aria-label="View calendar">
       <div class="ticket-stub">
         <div class="ticket-notch ticket-notch-left"></div>
         <div class="ticket-notch ticket-notch-right"></div>
-        <span class="font-typewriter text-[9px] tracking-[0.3em] uppercase block mb-2" style="color:rgba(201,169,110,0.5);">Today</span>
-        <span class="font-typewriter text-5xl leading-none" style="color:var(--gold);">24</span>
-        <span class="font-serif text-sm italic mt-1 block" style="color:var(--text-2);">July</span>
-        <span class="font-typewriter text-[8px] tracking-wider mt-2 block" style="color:rgba(240,230,210,0.4);">🌖 Waning Gibbous</span>
+        <span class="font-typewriter text-[10px] tracking-[0.3em] uppercase block mb-2" style="color:rgba(201,169,110,0.5);">Today</span>
+        <span class="font-typewriter text-6xl leading-none" style="color:var(--gold);">24</span>
+        <span class="font-serif text-base italic mt-1.5 block" style="color:var(--text-2);">July</span>
+        <span class="font-typewriter text-[9px] tracking-wider mt-2 block" style="color:rgba(240,230,210,0.4);">🌖 Waning Gibbous</span>
         <div class="ticket-divider"></div>
-        <span class="font-typewriter text-[8px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.35);">Chart</span>
+        <span class="font-typewriter text-[9px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.35);">Chart</span>
       </div>
     </a>
     
@@ -281,49 +281,50 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     z-index: 7;
   }  /* ── DATE TICKET ── */
   .date-ticket {
-    bottom: 4%;
-    right: 4%;
+    bottom: 8%;
+    right: 8%;
     transform: rotate(-2.5deg);
     z-index: 6;
   }
   .ticket-stub {
     position: relative;
-    padding: 1.25rem 1.5rem;
+    padding: 1.75rem 2rem;
     background:
-      radial-gradient(ellipse at 20% 20%, rgba(200, 180, 150, 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 80%, rgba(120, 170, 160, 0.06) 0%, transparent 50%),
-      linear-gradient(165deg, rgba(232, 223, 208, 0.10) 0%, rgba(14, 24, 48, 0.22) 100%);
-    border: 1.5px solid rgba(180, 160, 120, 0.20);
+      radial-gradient(ellipse at 20% 20%, rgba(200, 160, 160, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(140, 80, 80, 0.08) 0%, transparent 50%),
+      linear-gradient(165deg, rgba(60, 35, 35, 0.42) 0%, rgba(40, 22, 22, 0.48) 100%);
+    border: 1.5px solid rgba(160, 100, 100, 0.22);
     text-align: center;
-    min-width: 120px;
-    border-radius: 2px;
+    min-width: 140px;
+    border-radius: 3px;
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.03);
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 6px 20px rgba(0, 0, 0, 0.22);
   }
   .ticket-stub::before {
     content: '';
     position: absolute;
-    inset: 4px;
-    border: 1px dashed rgba(201, 169, 110, 0.12);
+    inset: 5px;
+    border: 1px dashed rgba(160, 100, 100, 0.18);
     pointer-events: none;
     border-radius: 1px;
   }
   .ticket-notch {
     position: absolute;
-    width: 16px;
-    height: 16px;
-    background: #0f172a;
+    width: 18px;
+    height: 18px;
+    background: linear-gradient(135deg, #2a1515, #1a0c0c);
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
-    border: 1px solid rgba(180, 160, 120, 0.15);
+    border: 1px solid rgba(160, 100, 100, 0.2);
   }
-  .ticket-notch-left { left: -8px; }
-  .ticket-notch-right { right: -8px; }
+  .ticket-notch-left { left: -9px; }
+  .ticket-notch-right { right: -9px; }
   .ticket-divider {
     height: 1px;
-    background: repeating-linear-gradient(90deg, rgba(201, 169, 110, 0.25) 0, rgba(201, 169, 110, 0.25) 5px, transparent 5px, transparent 8px);
-    margin: 0.6rem 0;
+    background: repeating-linear-gradient(90deg, rgba(180, 120, 120, 0.28) 0, rgba(180, 120, 120, 0.28) 6px, transparent 6px, transparent 10px);
+    margin: 0.75rem 0;
   }
 
   /* ── DECORATIVE MOONS ── */
