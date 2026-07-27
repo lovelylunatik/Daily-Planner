@@ -12,7 +12,7 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   <WhimsyDecorations />
 
   <!-- Scrapbook desk: no grid, no rigid container — items float freely -->
-  <div class="desk-surface relative w-full" style="height:calc(100vh - 3.5rem); overflow:hidden;">
+  <div class="desk-surface relative w-full" style="height:calc(100vh - 3.5rem); ">
     
     <!-- TAROT CARD: Oracle — top-left, angled on the velvet -->
     <a href="/oracle" class="desk-piece oracle-card" aria-label="Daily Oracle">
@@ -139,6 +139,7 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
 <style>
   /* ── DESK SURFACE: rich velvet + subtle wood grain ── */
   .desk-surface {
+    overflow: hidden;
     background:
       /* Subtle dark wood grain from center */
       repeating-linear-gradient(90deg, rgba(15,23,42,0.98) 0px, rgba(20,28,48,0.96) 1px, rgba(15,23,42,0.98) 3px),
