@@ -28,12 +28,10 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     <div class="desk-piece ritual-stack" aria-label="Today's Rituals">
       <div class="ritual-paper ritual-paper-1">
         <span class="paper-pin"></span>
-        <div class="flex items-center justify-between mb-2 gap-2">
-          <p class="font-typewriter text-[9px] tracking-wider uppercase" style="color:rgba(201,169,110,0.6);">Altar</p>
-          <a href="/rituals" class="text-[8px] font-typewriter tracking-wider hover:brightness-125 transition-all pointer-events-auto" style="color:rgba(201,169,110,0.4); text-decoration:none;">→ View Altar</a>
-        </div>
+        <p class="font-typewriter text-[9px] tracking-wider uppercase mb-2" style="color:rgba(201,169,110,0.6);">Altar</p>
         <RitualMini client:load />
       </div>
+      <a href="/rituals" style="position:absolute;top:4px;right:6px;font-size:10px;color:rgba(201,169,110,0.35);text-decoration:none;z-index:20;">→</a>
       <div class="ritual-paper ritual-paper-2"></div>
       <div class="ritual-paper ritual-paper-3"></div>
     </div>

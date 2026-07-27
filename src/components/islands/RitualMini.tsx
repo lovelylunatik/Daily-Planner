@@ -206,7 +206,7 @@ export default function RitualMini() {
             style={{ color: 'var(--text-1)' }}
           />
           <button
-            onClick={handleQuickAdd}
+            type="button" onClick={(e) => { e.preventDefault(); handleQuickAdd(); }}
             disabled={!quickTitle.trim()}
             className="text-[10px] font-typewriter px-2 py-0.5 rounded-sm transition-all"
             style={{
