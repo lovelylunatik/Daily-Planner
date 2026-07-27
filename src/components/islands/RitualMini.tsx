@@ -34,6 +34,7 @@ export default function RitualMini() {
   ];
 
   const [quickTitle, setQuickTitle] = useState('');
+  const [showCompleted, setShowCompleted] = useState(false);
 
   const handleQuickAdd = () => {
     if (!quickTitle.trim()) return;
@@ -190,6 +191,96 @@ export default function RitualMini() {
             ? `All ${completed.length} ritual${completed.length === 1 ? '' : 's'} complete`
             : 'The altar awaits your first ritual'}
         </motion.div>
+      )}
+
+      {/* ═══ COMPLETED RITUALS ═══ */}
+      {completed.length > 0 && (
+        <div className="mt-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); setShowCompleted(!showCompleted); }}
+            type="button"
+            className="w-full text-left py-1.5 px-2 rounded-sm transition-colors"
+            style={{ borderTop: '1px dashed rgba(201,169,110,0.1)' }}
+          >
+            <span className="text-[8px] font-typewriter tracking-wider" style={{ color: 'rgba(201,169,110,0.4)' }}>
+              {showCompleted ? '▼' : '▶'} Completed ({completed.length})
+            </span>
+          </button>
+          <AnimatePresence>
+            {showCompleted && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-1 pt-1 pb-2">
+                  {completed.map((task) => (
+                    <button
+                      key={task.id}
+                      onClick={(e) => { e.stopPropagation(); toggleTask(task.id); }}
+                      className="w-full text-left flex items-center gap-2 py-1.5 px-2 rounded-sm transition-colors opacity-40 hover:opacity-70"
+                      style={{ background: 'rgba(201,169,110,0.04)' }}
+                    >
+                      <span className="wax-seal-check" style={{ width: '14px', height: '14px', borderColor: 'rgba(201,169,110,0.2)' }}>
+                        <span className="text-[var(--gold)] text-[8px]">✓</span>
+                      </span>
+                      <span className="text-xs font-serif line-through" style={{ color: 'var(--text-3)' }}>
+                        {task.title}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
+
+      {/* ═══ COMPLETED RITUALS ═══ */}
+      {completed.length > 0 && (
+        <div className="mt-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); setShowCompleted(!showCompleted); }}
+            type="button"
+            className="w-full text-left py-1.5 px-2 rounded-sm transition-colors"
+            style={{ borderTop: '1px dashed rgba(201,169,110,0.1)' }}
+          >
+            <span className="text-[8px] font-typewriter tracking-wider" style={{ color: 'rgba(201,169,110,0.4)' }}>
+              {showCompleted ? '▼' : '▶'} Completed ({completed.length})
+            </span>
+          </button>
+          <AnimatePresence>
+            {showCompleted && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: 'auto', opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                className="overflow-hidden"
+              >
+                <div className="space-y-1 pt-1 pb-2">
+                  {completed.map((task) => (
+                    <button
+                      key={task.id}
+                      onClick={(e) => { e.stopPropagation(); toggleTask(task.id); }}
+                      className="w-full text-left flex items-center gap-2 py-1.5 px-2 rounded-sm transition-colors opacity-40 hover:opacity-70"
+                      style={{ background: 'rgba(201,169,110,0.04)' }}
+                    >
+                      <span className="wax-seal-check" style={{ width: '14px', height: '14px', borderColor: 'rgba(201,169,110,0.2)' }}>
+                        <span className="text-[var(--gold)] text-[8px]">✓</span>
+                      </span>
+                      <span className="text-xs font-serif line-through" style={{ color: 'var(--text-3)' }}>
+                        {task.title}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       )}
 
       {/* ═══ QUICK-ADD LINE ═══ */}
