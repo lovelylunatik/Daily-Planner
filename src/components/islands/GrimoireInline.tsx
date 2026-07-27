@@ -1,8 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { usePlannerStore } from '../../stores/usePlannerStore';
-import { getMoonPhaseForDate, getZodiacSign } from '../../lib/celestial';
-import { todayKey, formatDayName } from '../../lib/utils';
+import { todayKey } from '../../lib/utils';
 
 const PROMPTS = [
   'What did the moon whisper to you tonight?',
@@ -19,14 +18,10 @@ export default function GrimoireInline() {
   const [showPrompts, setShowPrompts] = useState(true);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  const { journalEntries, addJournalEntry, moods, oracleQuotes } = usePlannerStore();
+  const { journalEntries, addJournalEntry } = usePlannerStore();
 
   const today = todayKey();
   const entry = journalEntries[today];
-  const moon = getMoonPhaseForDate(new Date());
-  const zodiac = getZodiacSign(new Date());
-  const mood = moods[today];
-  const oracle = oracleQuotes[today];
 
   useEffect(() => {
     setMounted(true);
@@ -63,7 +58,7 @@ export default function GrimoireInline() {
         <div className="flex-1 flex items-center justify-center">
           <div className="w-5 h-5 border border-[#c9a96e]/30 rounded-full animate-pulse" />
         </div>
-        <div className="w-px bg-[#b4a082]/20" />
+        <div className="w-px flex-shrink-0" style={{ background: 'linear-gradient(to bottom, transparent, rgba(90,74,58,0.15) 20%, rgba(90,74,58,0.15) 80%, transparent)' }} />
         <div className="flex-1 flex items-center justify-center">
           <div className="w-5 h-5 border border-[#c9a96e]/30 rounded-full animate-pulse" />
         </div>
@@ -73,74 +68,37 @@ export default function GrimoireInline() {
 
   return (
     <div className="flex w-full h-full">
-      {/* ═══════ LEFT PAGE — Preview ═══════ */}
-      <div className="flex-1 flex flex-col p-4 relative overflow-hidden">
-        {/* Header */}
-        <div className="flex items-center gap-2 mb-2">
-          <span className="font-typewriter text-[8px] tracking-[0.25em] uppercase" style={{ color: 'rgba(90,74,58,0.45)' }}>
-            {formatDayName(today)}
-          </span>
-          <span className="flex-1 h-px" style={{ background: 'rgba(90,74,58,0.12)' }} />
+      {/* ═══════ LEFT PAGE — Encouragement ═══════ */}
+      <div className="flex-1 flex flex-col items-center justify-center p-6 relative overflow-hidden text-center">
+        {/* Decorative top mark */}
+        <div className="mb-4">
+          <span className="font-serif text-3xl italic" style={{ color: 'rgba(58,46,31,0.12)' }}>✦</span>
         </div>
 
-        {/* Moon & Zodiac line */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="text-sm">{moon.emoji}</span>
-          <span className="font-typewriter text-[8px] tracking-wider" style={{ color: 'rgba(90,74,58,0.4)' }}>
-            {moon.name}
-          </span>
-          <span className="text-[8px]" style={{ color: 'rgba(90,74,58,0.3)' }}>•</span>
-          <span className="font-typewriter text-[8px] tracking-wider" style={{ color: 'rgba(90,74,58,0.4)' }}>
-            {zodiac.symbol} {zodiac.name}
-          </span>
+        {/* Heading */}
+        <h2 className="font-serif text-lg italic mb-3" style={{ color: '#3a2e1f' }}>
+          The Page Awaits
+        </h2>
+
+        {/* Encouragement text */}
+        <p className="font-serif text-xs italic leading-relaxed max-w-[140px]" style={{ color: 'rgba(58,46,31,0.55)' }}>
+          "There is magic in the unwritten — a spark waiting for your hand to give it form."
+        </p>
+
+        {/* Subtle separator */}
+        <div className="w-8 h-px my-4" style={{ background: 'rgba(90,74,58,0.15)' }} />
+
+        {/* Words of encouragement */}
+        <p className="font-typewriter text-[8px] tracking-[0.2em] uppercase leading-relaxed" style={{ color: 'rgba(90,74,58,0.35)' }}>
+          No wrong words.<br/>
+          No empty pages.<br/>
+          Only yours.
+        </p>
+
+        {/* Bottom decorative */}
+        <div className="mt-auto pt-4">
+          <span className="font-serif text-xl italic" style={{ color: 'rgba(58,46,31,0.08)' }}>§</span>
         </div>
-
-        {/* Entry preview or empty state */}
-        {entry ? (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="flex-1 overflow-hidden"
-          >
-            <p className="font-serif text-sm italic leading-relaxed" style={{ color: '#3a2e1f' }}>
-              "{entry.content.slice(0, 200)}{entry.content.length > 200 ? '...' : ''}"
-            </p>
-            <div className="mt-3 pt-2 flex items-center justify-between" style={{ borderTop: '1px solid rgba(90,74,58,0.1)' }}>
-              <span className="font-typewriter text-[7px] tracking-wider" style={{ color: 'rgba(90,74,58,0.35)' }}>
-                {entry.content.trim().split(/\s+/).filter(Boolean).length} WORDS
-              </span>
-              <span className="font-typewriter text-[7px] tracking-wider" style={{ color: 'rgba(201,169,110,0.5)' }}>
-                SEALED
-              </span>
-            </div>
-          </motion.div>
-        ) : (
-          <div className="flex-1 flex flex-col items-center justify-center text-center py-4">
-            <div className="w-16 h-16 rounded-full border border-dashed flex items-center justify-center mb-3" style={{ borderColor: 'rgba(90,74,58,0.12)' }}>
-              <span className="font-serif text-xl italic" style={{ color: 'rgba(90,74,58,0.18)' }}>§</span>
-            </div>
-            <p className="font-typewriter text-[9px] tracking-wider uppercase" style={{ color: 'rgba(90,74,58,0.35)' }}>
-              The page awaits your hand
-            </p>
-            {mood && (
-              <p className="font-typewriter text-[8px] tracking-wider mt-1" style={{ color: 'rgba(90,74,58,0.25)' }}>
-                Mood: {mood.mood}
-              </p>
-            )}
-          </div>
-        )}
-
-        {/* Oracle preview at bottom */}
-        {oracle && (
-          <div className="mt-2 pt-2" style={{ borderTop: '1px solid rgba(90,74,58,0.08)' }}>
-            <p className="font-typewriter text-[7px] tracking-wider uppercase mb-1" style={{ color: 'rgba(90,74,58,0.3)' }}>
-              Daily Oracle
-            </p>
-            <p className="font-serif text-[11px] italic leading-relaxed line-clamp-2" style={{ color: 'rgba(58,46,31,0.65)' }}>
-              "{oracle.quote}"
-            </p>
-          </div>
-        )}
       </div>
 
       {/* Center spine divider */}
