@@ -252,84 +252,63 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .page-margin { padding: 0.875rem 0.75rem; height: 100%; }
   .book-spine { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(to right, rgba(201,169,110,0.1), rgba(201,169,110,0.25), rgba(201,169,110,0.1)); z-index: 10; box-shadow: 0 0 8px rgba(0,0,0,0.3); }
 
-  /* ── MOOD STRIP ── */
   /* ── Mood Apothecary Jar ── */
   .mood-strip {
-    /* Position: left side with breathing room */
-    top: 46%;
-    left: 10%;
+    /* Position: left side, floating in its own space */
+    top: 44%;
+    left: 8%;
 
-    /* Tall narrow jar silhouette */
-    width: 200px;
-    height: 370px;
+    /* Wide bulbous jar body */
+    width: 280px;
+    height: 320px;
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2.25rem 1.25rem 1.75rem;
+    padding: 1.5rem 1.25rem 2rem;
 
-    /* Amber glass body with depth */
-    background:
-      /* top inner light */
-      radial-gradient(ellipse 70% 30% at 50% 5%, rgba(255,245,220,0.08) 0%, transparent 100%),
-      /* right side highlight streak */
-      radial-gradient(ellipse 25% 55% at 92% 48%, rgba(255,255,255,0.05) 0%, transparent 100%),
-      /* left side dim reflection */
-      radial-gradient(ellipse 20% 45% at 8% 52%, rgba(255,255,255,0.02) 0%, transparent 100%),
-      /* warm amber base tint */
-      rgba(70, 55, 30, 0.28);
+    /* Full jar silhouette including neck, shoulders, body */
+    clip-path: polygon(50% 0%,55% 0%,58% 2%,63% 5%,68% 10%,73% 16%,82% 28%,91% 44%,93% 58%,91% 70%,86% 80%,78% 88%,66% 94%,50% 97%,34% 94%,22% 88%,14% 80%,9% 70%,7% 58%,9% 44%,18% 28%,27% 16%,32% 10%,37% 5%,42% 2%,45% 0%);
 
-    /* Rounded top corners, generous rounded bottom (jar silhouette) */
-    border-radius: 16px 16px 50% 50% / 12px 12px 30% 30%;
+    /* Amber glass body with warm depth */
+    background: radial-gradient(ellipse 60% 22% at 50% 12%,rgba(255,245,220,0.06) 0%,transparent 100%),radial-gradient(ellipse 80% 60% at 52% 40%,rgba(255,255,255,0.04) 0%,transparent 100%),radial-gradient(ellipse 16% 50% at 90% 48%,rgba(255,255,255,0.045) 0%,transparent 100%),radial-gradient(ellipse 14% 45% at 8% 50%,rgba(255,255,255,0.025) 0%,transparent 100%),radial-gradient(circle at 50% 55%,rgba(120,75,35,0.28) 0%,rgba(80,50,25,0.36) 60%,rgba(55,35,18,0.32) 100%);
 
-    /* Glass edge — warm gold-tinted */
-    border: 1.5px solid rgba(201, 185, 150, 0.18);
-
-    /* Depth: inner bevel + ambient */
-    box-shadow:
-      /* inner top glow */
-      inset 0 8px 24px rgba(255,250,230,0.04),
-      /* inner bottom shadow */
-      inset 0 -4px 12px rgba(0,0,0,0.15),
-      /* outer drop */
-      0 8px 28px rgba(0,0,0,0.22),
-      /* warm ambient */
-      0 0 45px rgba(200, 175, 130, 0.05);
+    /* Luminous depth */
+    box-shadow:inset 0 10px 30px rgba(255,240,210,0.04),inset 0 -6px 18px rgba(0,0,0,0.20),0 10px 35px rgba(0,0,0,0.25),0 0 50px rgba(200,170,100,0.04);
 
     z-index: 7;
   }
 
-  /* ── Cork lid ── */
+  /* ── Cork stopper ── */
   .mood-strip::before {
     content: '';
     position: absolute;
-    top: -16px;
+    top: -2px;
     left: 50%;
     transform: translateX(-50%);
-    width: 78%;
-    height: 20px;
-    background:
-      rgba(165, 138, 98, 0.62);
-    border-radius: 5px 5px 2px 2px;
-    border: 1px solid rgba(190, 165, 120, 0.32);
-    box-shadow:
-      inset 0 1px 2px rgba(255,255,255,0.08),
-      0 3px 8px rgba(0,0,0,0.25);
+    width: 42px;
+    height: 18px;
+    background: radial-gradient(ellipse at 30% 30%,rgba(195,170,130,0.50) 0%,rgba(170,145,105,0.62) 100%);
+    border-radius: 4px 4px 2px 2px;
+    border: 1px solid rgba(180,155,115,0.30);
+    box-shadow: inset 0 1px 2px rgba(255,255,255,0.10),0 3px 10px rgba(0,0,0,0.30);
+    z-index: 1;
   }
 
-  /* ── Gold wire bail (clamp arch) ── */
+  /* ── Gold wire bail arch ── */
   .mood-strip::after {
     content: '';
     position: absolute;
-    top: -26px;
+    top: -6px;
     left: 50%;
     transform: translateX(-50%);
-    width: 86%;
-    height: 26px;
-    border: 2px solid rgba(201, 169, 110, 0.22);
+    width: 56px;
+    height: 24px;
+    border: 2px solid rgba(201,169,110,0.20);
     border-bottom: none;
     border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+    z-index: 1;
   }  /* ── DATE TICKET ── */
   .date-ticket {
     bottom: 6%;
