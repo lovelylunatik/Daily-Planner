@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { usePlannerStore, type Task } from '../../stores/usePlannerStore';
+import { usePlannerStore, type Task, type EventType } from '../../stores/usePlannerStore';
 import { getMoonPhaseForDate } from '../../lib/celestial';
 import { todayKey, formatDayName, isCarriedOver } from '../../lib/utils';
 
@@ -9,6 +9,7 @@ export default function RitualList() {
   const [newTitle, setNewTitle] = useState('');
   const [newSub, setNewSub] = useState('');
   const [viewDate, setViewDate] = useState<string>(todayKey());
+  const [newTaskType, setNewTaskType] = useState<'reminder' | 'todo'>('todo');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -30,7 +31,7 @@ export default function RitualList() {
 
   const handleAdd = () => {
     if (!newTitle.trim()) return;
-    addTask(newTitle.trim());
+    addTask(newTitle.trim(), newTaskType);
     setNewTitle('');
   };
 
@@ -38,6 +39,21 @@ export default function RitualList() {
     if (!newSub.trim()) return;
     addSubTask(parentId, newSub.trim());
     setNewSub('');
+  };
+
+  // Group scheduled events by type for display
+  const typeOrder: EventType[] = ['birthday', 'appointment', 'reminder', 'todo'];
+  const typeLabel: Record<EventType, string> = {
+    birthday: 'Birthdays',
+    appointment: 'Appointments',
+    reminder: 'Reminders',
+    todo: 'Scheduled Tasks',
+  };
+  const typeIcon: Record<EventType, string> = {
+    birthday: '🎂',
+    appointment: '🕐',
+    reminder: '📌',
+    todo: '•',
   };
 
   return (
@@ -49,17 +65,27 @@ export default function RitualList() {
         </p>
       </div>
 
+      {/* ═══ SCHEDULED EVENTS ═══ */}
       {scheduled.length > 0 && (
         <section>
-          <SectionTitle icon="☉">Scheduled</SectionTitle>
-          <div className="space-y-2">
-            {scheduled.map((evt) => (
-              <EventCard key={evt.id} event={evt} />
-            ))}
-          </div>
+          {typeOrder.map((type) => {
+            const evts = scheduled.filter((e) => e.type === type);
+            if (evts.length === 0) return null;
+            return (
+              <div key={type} className="mb-5">
+                <SectionTitle icon={typeIcon[type]}>{typeLabel[type]}</SectionTitle>
+                <div className="space-y-2">
+                  {evts.map((evt) => (
+                    <EventCard key={evt.id} event={evt} type={type} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </section>
       )}
 
+      {/* ═══ STANDALONE RITUALS ═══ */}
       <section>
         <SectionTitle>Standalone Rituals</SectionTitle>
 
@@ -123,21 +149,45 @@ export default function RitualList() {
           </div>
         )}
 
-        <div className="flex gap-2 mt-4">
-          <input
-            type="text"
-            value={newTitle}
-            onChange={(e) => setNewTitle(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
-            placeholder="Add a standalone ritual..."
-            className="flex-1 bg-[var(--bg-card)] border border-[var(--text-3)]/20 rounded-lg px-3 py-2 text-sm font-serif text-[var(--text-1)] placeholder:text-[var(--text-3)]/40 focus:outline-none focus:border-[var(--gold)]/50"
-          />
-          <button onClick={handleAdd} className="wax-seal px-4 py-2 rounded-full font-typewriter text-xs tracking-wider transition-transform hover:scale-105 active:scale-95">
-            +
-          </button>
+        {/* ═══ ADD NEW RITUAL ═══ */}
+        <div className="space-y-3 mt-4">
+          <div className="flex items-center gap-2">
+            <span className="text-[9px] font-typewriter tracking-wider text-[var(--text-3)]/60 uppercase">Type</span>
+            {([
+              { type: 'reminder' as const, label: 'Reminder', icon: '📌' },
+              { type: 'todo' as const, label: 'To-do', icon: '•' },
+            ]).map((opt) => (
+              <button
+                key={opt.type}
+                onClick={() => setNewTaskType(opt.type)}
+                className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-[9px] font-typewriter transition-all ${
+                  newTaskType === opt.type
+                    ? 'wax-seal'
+                    : 'bg-[var(--bg-paper)] border border-[var(--text-3)]/15 text-[var(--text-3)]/70 hover:border-[var(--gold)]/30'
+                }`}
+              >
+                <span>{opt.icon}</span>
+                <span>{opt.label}</span>
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-2">
+            <input
+              type="text"
+              value={newTitle}
+              onChange={(e) => setNewTitle(e.target.value)}
+              onKeyDown={(e) => e.key === 'Enter' && handleAdd()}
+              placeholder={newTaskType === 'reminder' ? 'Add a reminder...' : 'Add a to-do...'}
+              className="flex-1 bg-[var(--bg-card)] border border-[var(--text-3)]/20 rounded-lg px-3 py-2 text-sm font-serif text-[var(--text-1)] placeholder:text-[var(--text-3)]/40 focus:outline-none focus:border-[var(--gold)]/50"
+            />
+            <button onClick={handleAdd} className="wax-seal px-4 py-2 rounded-full font-typewriter text-xs tracking-wider transition-transform hover:scale-105 active:scale-95">
+              +
+            </button>
+          </div>
         </div>
       </section>
 
+      {/* ═══ COMPLETED ═══ */}
       {complete.length > 0 && (
         <section className="border-t border-[var(--text-3)]/15 pt-6">
           <h2 className="font-typewriter text-[10px] tracking-[0.25em] text-[var(--text-3)] uppercase mb-3 line-through">Completed</h2>
@@ -161,19 +211,22 @@ function SectionTitle({ children, icon }: { children: React.ReactNode; icon?: st
   );
 }
 
-function EventCard({ event }: { event: { id: string; title: string; time?: string; date: string } }) {
+function EventCard({ event, type }: { event: { id: string; title: string; time?: string; date: string; type: string }; type: string }) {
+  const isBirthday = type === 'birthday';
   return (
     <motion.div
       layout
       initial={{ opacity: 0, y: -4 }}
       animate={{ opacity: 1, y: 0 }}
-      className="ritual-strip flex items-center gap-3 relative z-[1]"
+      className={`ritual-strip flex items-center gap-3 relative z-[1] ${isBirthday ? 'birthday-banner-sm' : ''}`}
     >
-      <div className="w-5 h-5 rounded-full border border-[var(--text-3)]/30 flex items-center justify-center flex-shrink-0 bg-[var(--deep)]/50">
-        <span className="text-[10px] text-[var(--text-3)]">☉</span>
+      <div className={`w-5 h-5 rounded-full border flex items-center justify-center flex-shrink-0 ${isBirthday ? 'border-[var(--gold)] bg-[var(--gold)]/10' : 'border-[var(--text-3)]/30 bg-[var(--deep)]/50'}`}>
+        <span className={`text-[10px] ${isBirthday ? 'text-[var(--gold)]' : 'text-[var(--text-3)]'}`}>
+          {type === 'birthday' ? '🕯' : type === 'appointment' ? '🕐' : type === 'reminder' ? '📌' : '•'}
+        </span>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-[var(--text-1)] text-sm font-serif">{event.title}</p>
+        <p className={`text-sm font-serif ${isBirthday ? 'font-bold' : 'text-[var(--text-1)]'}`}>{event.title}</p>
         {event.time && <p className="text-[var(--text-3)] text-[10px] font-typewriter">{event.time}</p>}
       </div>
     </motion.div>
@@ -184,6 +237,7 @@ function TaskCard({ task, onToggle, onDelete, children }: {
   task: Task; onToggle: (id: string) => void; onDelete: (id: string) => void; children?: React.ReactNode;
 }) {
   const carried = isCarriedOver(task.createdAt);
+  const isReminder = task.type === 'reminder';
   return (
     <motion.div
       layout
@@ -191,12 +245,12 @@ function TaskCard({ task, onToggle, onDelete, children }: {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95, height: 0, marginBottom: 0 }}
       transition={{ duration: 0.35, ease: 'easeInOut' }}
-      className={'ritual-strip flex items-start gap-3 mb-2 flex-col relative z-[1] ' + (carried ? 'carry-glow' : '')}
+      className={`ritual-strip flex items-start gap-3 mb-2 flex-col relative z-[1] ${carried ? 'carry-glow' : ''} ${isReminder ? 'reminder-row' : ''}`}
     >
       <div className="flex items-center gap-3 w-full relative z-[2]">
         <button
           onClick={() => onToggle(task.id)}
-          className={'wax-seal-check ' + (task.completed ? 'checked' : '')}
+          className={`wax-seal-check ${task.completed ? 'checked' : ''}`}
         >
           {task.completed && (
             <motion.span
@@ -210,7 +264,7 @@ function TaskCard({ task, onToggle, onDelete, children }: {
           )}
         </button>
         <div className="flex-1 min-w-0">
-          <p className="text-sm leading-snug text-[var(--text-1)]">{task.title}</p>
+          <p className={`text-sm leading-snug ${isReminder ? 'font-bold text-[var(--text-1)]' : 'text-[var(--text-1)]'}`}>{task.title}</p>
           {task.subTasks.length > 0 && (
             <p className="text-[9px] font-typewriter text-[var(--text-3)] mt-0.5 tracking-wide">
               {task.subTasks.filter((s) => s.completed).length} OF {task.subTasks.length}
@@ -218,6 +272,7 @@ function TaskCard({ task, onToggle, onDelete, children }: {
           )}
         </div>
         {carried && <span className="text-[10px] text-[var(--gold)]/60" title="Carried over from a previous day">⟳</span>}
+        {isReminder && <span className="text-[8px] font-typewriter tracking-wider text-[var(--gold)]/60 ml-2">REMINDER</span>}
         <button onClick={() => onDelete(task.id)} className="text-[var(--text-3)]/40 hover:text-[var(--rose)] text-xs px-1 transition-colors">×</button>
       </div>
       {children}

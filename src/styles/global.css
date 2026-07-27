@@ -24,3 +24,66 @@
   75% { opacity: 1.0; transform: scale(1.15); }
   100% { opacity: 0.35; transform: scale(0.95); }
 }
+/* ═══ Ritual type styles ═══ */
+.birthday-banner {
+  background: linear-gradient(135deg, rgba(201,169,110,0.18) 0%, rgba(176,112,120,0.1) 100%);
+  border: 1px solid rgba(201,169,110,0.25);
+  border-radius: 6px;
+  box-shadow: 0 0 12px rgba(201,169,110,0.1), inset 0 1px 0 rgba(255,255,255,0.05);
+  position: relative;
+  overflow: hidden;
+}
+.birthday-banner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
+.birthday-banner-sm {
+  background: rgba(201,169,110,0.06);
+  border: 1px solid rgba(201,169,110,0.12);
+  border-radius: 4px;
+}
+
+.appointment-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(140,170,160,0.06);
+  border: 1px solid rgba(140,170,160,0.12);
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+.appointment-row:hover {
+  background: rgba(140,170,160,0.1);
+}
+
+.reminder-row {
+  background: rgba(168,149,182,0.06) !important;
+  border: 1px solid rgba(168,149,182,0.15) !important;
+}
+.reminder-row .wax-seal-check {
+  border-color: rgba(168,149,182,0.5) !important;
+}
+
+.quick-add-row {
+  padding: 0.25rem 0.5rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+.quick-add-row:hover {
+  opacity: 1;
+}
+.quick-add-row:focus-within {
+  opacity: 1;
+}
+.quick-add-row input::placeholder {
+  font-style: italic;
+}
+
+.event-pin {
+  cursor: default;
+  background: rgba(168,149,182,0.15) !important;
+  border-color: rgba(168,149,182,0.4) !important;
+}

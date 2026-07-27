@@ -24,8 +24,9 @@ export default function CalendarGrid() {
   const [newEventTitle, setNewEventTitle] = useState('');
   const [newEventTime, setNewEventTime] = useState('');
   const [newEventRecurring, setNewEventRecurring] = useState<'' | 'daily' | 'weekly' | 'monthly'>('');
+  const [newEventType, setNewEventType] = useState<'birthday' | 'appointment' | 'reminder' | 'todo'>('appointment');
 
-  const { events, addEvent } = usePlannerStore();
+  const { events, addEvent, deleteEvent } = usePlannerStore();
 
   useEffect(() => { setMounted(true); }, []);
 
@@ -47,21 +48,38 @@ export default function CalendarGrid() {
   const openForm = useCallback((dateStr?: string) => {
     setFormDate(dateStr || formatDateKey(new Date()));
     setNewEventTitle(''); setNewEventTime(''); setNewEventRecurring('');
+    setNewEventType('appointment');
     setShowForm(true);
   }, []);
 
   const handleSave = () => {
     if (!newEventTitle.trim()) return;
-    addEvent({ title: newEventTitle.trim(), date: formDate, time: newEventTime || undefined, recurring: newEventRecurring || undefined });
-    setShowForm(false); setNewEventTitle(''); setNewEventTime(''); setNewEventRecurring('');
+    addEvent({ title: newEventTitle.trim(), date: formDate, time: newEventTime || undefined, recurring: newEventRecurring || undefined, type: newEventType });
+    setShowForm(false); setNewEventTitle(''); setNewEventTime(''); setNewEventRecurring(''); setNewEventType('appointment');
   };
 
   const openRituals = (day: number) => { if (showForm) return; window.location.href = '/rituals?date=' + formatDate(year, month, day); };
   const handleContextMenu = (e: React.MouseEvent, d: number) => { e.preventDefault(); openForm(formatDate(year, month, d)); };
 
+  // Type color map for dots on the calendar
+  const typeColor: Record<string, string> = {
+    birthday: '#c9a96e',
+    appointment: '#8ab4a0',
+    reminder: '#a895b6',
+    todo: '#6a8aaa',
+  };
+
+  // Type icon map
+  const typeIcon: Record<string, string> = {
+    birthday: '🎂',
+    appointment: '🕐',
+    reminder: '📌',
+    todo: '•',
+  };
+
   return (
     <div className="max-w-5xl mx-auto pt-2 pb-16">
-      {/* ═══ ALMANAC BOARD — rich sage velvet ═══ */}
+      {/* ═══ ALMANAC BOARD ═══ */}
       <div className="relative p-6 md:p-10"
         style={{
           backgroundColor: '#1e2a26',
@@ -75,10 +93,8 @@ export default function CalendarGrid() {
           border: '1px solid rgba(201,169,110,0.12)',
         }}
       >
-        {/* pressed flowers on board corners */}
-        {/* gold top border */}
+        {/* Frame details */}
         <div style={{ position: 'absolute', top: 6, left: 20, right: 20, height: 2, background: 'linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.35) 15%, rgba(201,169,110,0.5) 50%, rgba(201,169,110,0.35) 85%, transparent 100%)', borderRadius: 1 }} />
-        {/* gold bottom border */}
         <div style={{ position: 'absolute', bottom: 6, left: 20, right: 20, height: 2, background: 'linear-gradient(90deg, transparent 0%, rgba(201,169,110,0.35) 15%, rgba(201,169,110,0.5) 50%, rgba(201,169,110,0.35) 85%, transparent 100%)', borderRadius: 1 }} />
         {[{t:8,l:8},{t:8,r:8},{b:8,l:8},{b:8,r:8}].map((pos,i) => (
           <span key={i} className="absolute text-[var(--gold)]/20 text-2xl pointer-events-none select-none" style={{ ...(pos.t!==undefined?{top:pos.t}:{bottom:pos.b}), ...(pos.l!==undefined?{left:pos.l}:{right:pos.r}), fontFamily:'serif' }}>❦</span>
@@ -107,7 +123,7 @@ export default function CalendarGrid() {
           ))}
         </div>
 
-        {/* ═══ DAY GRID — torn paper cards ═══ */}
+        {/* ═══ DAY GRID ═══ */}
         <div className="grid grid-cols-7 gap-2">
           {Array.from({ length: firstDay }, (_, i) => <div key={`bl-${i}`} className="min-h-[100px]" />)}
 
@@ -125,7 +141,6 @@ export default function CalendarGrid() {
             const rot = isToday ? 0 : cardRotation(seed);
             const z = isToday ? 50 : cardZ(seed);
 
-            /* Card colors */
             const cardBg = isToday ? '#f5efe3' : isPast ? '#c9bca8' : '#ddd0ba';
             const textColor = '#3a2e1f';
 
@@ -161,19 +176,15 @@ export default function CalendarGrid() {
                     filter: isToday ? 'drop-shadow(0 0 8px rgba(201,169,110,0.4))' : 'none',
                   }}
                 >
-                  {/* heavy paper grain overlay */}
                   <div style={{
                     position: 'absolute', inset: 0, pointerEvents: 'none', opacity: 0.28,
                     backgroundImage: 'url("data:image/svg+xml,%3Csvg%20viewBox%3D%270%200%20256%20256%27%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.85%27%20numOctaves%3D%274%27%20stitchTiles%3D%27stitch%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url(%23n)%27%2F%3E%3C%2Fsvg%3E")',
                     backgroundSize: '80px 80px',
                     mixBlendMode: 'multiply',
                   }} />
-
-                  {/* top-left light catch */}
                   <div style={{ position: 'absolute', top: 0, left: 0, right: '35%', height: '2px', background: 'rgba(255,255,255,0.35)', pointerEvents: 'none' }} />
                   <div style={{ position: 'absolute', top: 0, left: 0, bottom: '35%', width: '2px', background: 'rgba(255,255,255,0.25)', pointerEvents: 'none' }} />
 
-                  {/* TODAY: warm outer glow */}
                   {isToday && (
                     <div style={{
                       position: 'absolute', inset: '-8px', pointerEvents: 'none', zIndex: -1,
@@ -183,18 +194,16 @@ export default function CalendarGrid() {
                     }} />
                   )}
 
-                  {/* date */}
                   <span className="text-[11px] font-typewriter block mb-0.5 leading-none font-bold" style={{ color: textColor }}>{d}</span>
-
-                  {/* moon */}
                   <span className="text-[13px] block leading-none" style={{ opacity: isPast ? 0.5 : 0.9 }}>{moonPhase.emoji}</span>
 
-                  {/* events */}
+                  {/* Events with colored dots by type */}
                   {dayEvents.length > 0 && (
                     <div className="mt-auto pt-1.5 space-y-0.5">
                       {dayEvents.map((e) => (
                         <div key={e.id} className="flex items-center gap-1 min-w-0">
-                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: '#9c4a5a' }} />
+                          <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: typeColor[e.type] || '#9c4a5a' }} />
+                          <span className="text-[8px] leading-tight" style={{ opacity: 0.6 }}>{typeIcon[e.type] || '•'}</span>
                           {e.time && <span className="text-[7px] font-typewriter tabular-nums leading-tight" style={{ color: 'rgba(58,46,31,0.5)' }}>{e.time}</span>}
                           <span className="text-[8px] font-serif italic truncate leading-tight" style={{ color: 'rgba(58,46,31,0.8)' }}>{e.title}</span>
                         </div>
@@ -202,7 +211,6 @@ export default function CalendarGrid() {
                     </div>
                   )}
 
-                  {/* future watermark */}
                   {isFuture && dayEvents.length === 0 && (
                     <div className="absolute bottom-2 right-2 pointer-events-none text-lg" style={{ color: 'rgba(58,46,31,0.1)' }}>☆</div>
                   )}
@@ -219,7 +227,7 @@ export default function CalendarGrid() {
         </div>
       </div>
 
-      {/* ═══ FORM MODAL ═══ */}
+      {/* ═══ FORM MODAL with Type Selector ═══ */}
       <AnimatePresence>
         {showForm && (
           <>
@@ -230,6 +238,33 @@ export default function CalendarGrid() {
                   <p className="font-serif text-lg italic text-[var(--text-1)]">Add a Ritual</p>
                   <button onClick={() => setShowForm(false)} className="text-[var(--text-3)] hover:text-[var(--text-1)] text-lg leading-none transition-colors">×</button>
                 </div>
+
+                {/* ═══ TYPE SELECTOR ═══ */}
+                <div>
+                  <label className="font-typewriter text-[9px] tracking-wider text-[var(--text-3)]/60 uppercase block mb-2">What kind of ritual?</label>
+                  <div className="grid grid-cols-4 gap-2">
+                    {([
+                      { type: 'birthday' as const, icon: '🎂', label: 'Birthday' },
+                      { type: 'appointment' as const, icon: '🕐', label: 'Appointment' },
+                      { type: 'reminder' as const, icon: '📌', label: 'Reminder' },
+                      { type: 'todo' as const, icon: '•', label: 'To-do' },
+                    ]).map((opt) => (
+                      <button
+                        key={opt.type}
+                        onClick={() => setNewEventType(opt.type)}
+                        className={`flex flex-col items-center gap-1 py-2 rounded-lg text-[9px] font-typewriter transition-all ${
+                          newEventType === opt.type
+                            ? 'wax-seal ring-1 ring-[var(--gold)]/50'
+                            : 'bg-[var(--bg-paper)] border border-[var(--text-3)]/15 text-[var(--text-3)]/70 hover:border-[var(--gold)]/30'
+                        }`}
+                      >
+                        <span className="text-base">{opt.icon}</span>
+                        <span>{opt.label}</span>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="space-y-3">
                   <div>
                     <label className="font-typewriter text-[9px] tracking-wider text-[var(--text-3)]/60 uppercase block mb-1">Name</label>

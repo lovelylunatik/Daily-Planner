@@ -7,13 +7,18 @@ export interface SubTask {
   completed: boolean;
 }
 
+export type TaskType = 'reminder' | 'todo';
+
 export interface Task {
   id: string;
   title: string;
   completed: boolean;
   createdAt: string;
   subTasks: SubTask[];
+  type: TaskType;
 }
+
+export type EventType = 'birthday' | 'appointment' | 'reminder' | 'todo';
 
 export interface CalendarEvent {
   id: string;
@@ -21,6 +26,7 @@ export interface CalendarEvent {
   time?: string;
   date: string;
   recurring?: 'daily' | 'weekly' | 'monthly';
+  type: EventType;
 }
 
 export interface JournalEntry {
@@ -43,7 +49,7 @@ interface PlannerState {
   oracleQuotes: Record<string, { quote: string; source: string }>;
   moods: Record<string, MoodEntry>;
 
-  addTask: (title: string) => void;
+  addTask: (title: string, type?: TaskType) => void;
   toggleTask: (id: string) => void;
   deleteTask: (id: string) => void;
   addSubTask: (parentId: string, title: string) => void;
@@ -72,7 +78,7 @@ export const usePlannerStore = create<PlannerState>()(
       oracleQuotes: {},
       moods: {},
 
-      addTask: (title) =>
+      addTask: (title, type = 'todo') =>
         set((state) => ({
           tasks: [
             ...state.tasks,
@@ -82,6 +88,7 @@ export const usePlannerStore = create<PlannerState>()(
               completed: false,
               createdAt: new Date().toISOString().split('T')[0],
               subTasks: [],
+              type,
             },
           ],
         })),
@@ -151,3 +158,18 @@ export const usePlannerStore = create<PlannerState>()(
     { name: 'daily-planner-storage' }
   )
 );
+
+// --- Backward-compat helper ---
+export function normalizeLegacyTasks(tasks: Task[]): Task[] {
+  return tasks.map((t) => ({
+    ...t,
+    type: (t as any).type || 'todo',
+  }));
+}
+
+export function normalizeLegacyEvents(events: CalendarEvent[]): CalendarEvent[] {
+  return events.map((e) => ({
+    ...e,
+    type: (e as any).type || 'todo',
+  }));
+}
