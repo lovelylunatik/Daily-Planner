@@ -253,42 +253,83 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
   .book-spine { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(to right, rgba(201,169,110,0.1), rgba(201,169,110,0.25), rgba(201,169,110,0.1)); z-index: 10; box-shadow: 0 0 8px rgba(0,0,0,0.3); }
 
   /* ── MOOD STRIP ── */
-  /* ── Celestial Mood Star ── */
+  /* ── Mood Apothecary Jar ── */
   .mood-strip {
+    /* Position: left side with breathing room */
     top: 46%;
-    left: 8%;
-    width: 400px;
-    height: 340px;
+    left: 10%;
+
+    /* Tall narrow jar silhouette */
+    width: 200px;
+    height: 370px;
+
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1rem;
+    padding: 2.25rem 1.25rem 1.75rem;
+
+    /* Amber glass body with depth */
     background:
-      radial-gradient(circle at 50% 50%, rgba(140,70,70,0.35) 0%, rgba(90,40,40,0.42) 60%, rgba(60,25,25,0.38) 100%);
-    clip-path: polygon(
-      50% 0%,
-      56% 14%,
-      86% 4%,
-      80% 30%,
-      100% 50%,
-      80% 70%,
-      86% 96%,
-      56% 86%,
-      50% 100%,
-      44% 86%,
-      14% 96%,
-      20% 70%,
-      0% 50%,
-      20% 30%,
-      14% 4%,
-      44% 14%
-    );
-    filter:
-      drop-shadow(0 0 1px rgba(201,169,110,0.80))
-      drop-shadow(0 0 3px rgba(201,169,110,0.50))
-      drop-shadow(0 0 6px rgba(201,169,110,0.20));
+      /* top inner light */
+      radial-gradient(ellipse 70% 30% at 50% 5%, rgba(255,245,220,0.08) 0%, transparent 100%),
+      /* right side highlight streak */
+      radial-gradient(ellipse 25% 55% at 92% 48%, rgba(255,255,255,0.05) 0%, transparent 100%),
+      /* left side dim reflection */
+      radial-gradient(ellipse 20% 45% at 8% 52%, rgba(255,255,255,0.02) 0%, transparent 100%),
+      /* warm amber base tint */
+      rgba(70, 55, 30, 0.28);
+
+    /* Rounded top corners, generous rounded bottom (jar silhouette) */
+    border-radius: 16px 16px 50% 50% / 12px 12px 30% 30%;
+
+    /* Glass edge — warm gold-tinted */
+    border: 1.5px solid rgba(201, 185, 150, 0.18);
+
+    /* Depth: inner bevel + ambient */
+    box-shadow:
+      /* inner top glow */
+      inset 0 8px 24px rgba(255,250,230,0.04),
+      /* inner bottom shadow */
+      inset 0 -4px 12px rgba(0,0,0,0.15),
+      /* outer drop */
+      0 8px 28px rgba(0,0,0,0.22),
+      /* warm ambient */
+      0 0 45px rgba(200, 175, 130, 0.05);
+
     z-index: 7;
+  }
+
+  /* ── Cork lid ── */
+  .mood-strip::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 78%;
+    height: 20px;
+    background:
+      rgba(165, 138, 98, 0.62);
+    border-radius: 5px 5px 2px 2px;
+    border: 1px solid rgba(190, 165, 120, 0.32);
+    box-shadow:
+      inset 0 1px 2px rgba(255,255,255,0.08),
+      0 3px 8px rgba(0,0,0,0.25);
+  }
+
+  /* ── Gold wire bail (clamp arch) ── */
+  .mood-strip::after {
+    content: '';
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 86%;
+    height: 26px;
+    border: 2px solid rgba(201, 169, 110, 0.22);
+    border-bottom: none;
+    border-radius: 50% 50% 0 0 / 100% 100% 0 0;
   }  /* ── DATE TICKET ── */
   .date-ticket {
     bottom: 6%;
