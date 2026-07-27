@@ -1,66 +1,385 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ScrapbookPane from '../components/ui/ScrapbookPane.astro';
-import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
-import RitualMini from '../components/islands/RitualMini';
-import LivingClock from '../components/islands/LivingClock';
-import JournalMini from '../components/islands/JournalMini';
 import OracleMini from '../components/islands/OracleMini';
+import LivingClock from '../components/islands/LivingClock';
+import RitualMini from '../components/islands/RitualMini';
 import MoodMini from '../components/islands/MoodMini';
+import JournalMini from '../components/islands/JournalMini';
+import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
 ---
+
 <Layout title="The Oracle's Desk">
-  {/* Floating whimsy: cherubs, moons, butterflies, stars */}
   <WhimsyDecorations />
 
-  <div class="max-w-6xl mx-auto relative z-10">
-    <div class="grid grid-cols-1 md:grid-cols-[260px_1fr_1fr] gap-5 md:gap-6 auto-rows-min relative z-10">
-      <!-- Today / Calendar — Star Chart personality -->
-      <a href="/week" class="contents">
-        <ScrapbookPane title="Today" rotation={-1.2} className="row-span-1 relative" personality="star-chart">
-          <span class="hanging-star" style="top:10px;right:12px;" />
-          <div class="text-center py-2 relative">
-            <div class="font-typewriter text-3xl" style="color:#dcc088">25</div>
-            <div class="font-serif text-sm italic mt-1" style="opacity:0.85">July</div>
-            <div class="font-typewriter text-[10px] tracking-wider mt-2" style="opacity:0.65">🌖 WANING GIBBOUS</div>
-            <div class="font-typewriter text-[9px] tracking-wider mt-3 uppercase" style="color:#dcc088; opacity:0.55">CLICK FOR FULL CHART</div>
-            <span class="compass-star absolute top-0 right-0 text-sm opacity-40"></span>
-          </div>
-        </ScrapbookPane>
-      </a>
-
-      <!-- Daily Oracle — Tarot card sized, centered in its pane -->
-      <ScrapbookPane title="Daily Oracle" rotation={0.8} className="md:col-span-2 relative flex items-center justify-center" personality="tarot">
-        <span class="hanging-star" style="top:12px;left:16px;" />
-        <span class="hanging-star" style="top:8px;right:20px;" />
-        <span class="hanging-star" style="top:20px;left:60%;" />
+  <!-- No-scroll scrapbook desk -->
+  <div class="desk-surface relative w-full flex items-center justify-center" style="height:calc(100vh - 3.5rem); padding:0.5rem;">
+    
+    <div class="collage relative">
+      
+      <!-- TAROT CARD: ORACLE (top-left, angled) -->
+      <a href="/oracle" class="desk-item oracle-card" aria-label="Daily Oracle">
         <OracleMini client:load />
-      </ScrapbookPane>
-
-      <!-- Today's Rituals — Wax Seal personality -->
-      <ScrapbookPane title="Today's Rituals" rotation={0.5} className="md:row-span-2" personality="wax-seal">
-        <RitualMini client:load />
-        <a href="/rituals" class="block mt-4 pt-3 font-typewriter text-[10px] tracking-wide text-center uppercase transition-colors" style="border-top:1px solid rgba(80,60,40,0.25); opacity:0.7; color:#5a4030;">
-          View full altar
-        </a>
-      </ScrapbookPane>
-
-      <!-- Grimoire / Journal — Parchment personality -->
-      <ScrapbookPane title="Grimoire" rotation={-0.6} className="md:col-span-2" personality="parchment">
-        <JournalMini client:load />
-      </ScrapbookPane>
-
-      <!-- The Hour — Wooden clock, cozy size -->
-      <div class="newspaper-overlay">
-        <ScrapbookPane title="The Hour" rotation={1.0} personality="sundial">
-          <LivingClock client:load />
-        </ScrapbookPane>
+      </a>
+      
+      <!-- ORNATE CLOCK (top-center) -->
+      <div class="desk-item clock-face">
+        <LivingClock client:load />
       </div>
-
-      <!-- Mood — Celestial personality -->
-      <ScrapbookPane title="Mood" rotation={-0.8} personality="celestial">
+      
+      <!-- RITUAL ALTAR: torn paper stack (top-right) -->
+      <a href="/rituals" class="desk-item ritual-stack" aria-label="Today's Rituals">
+        <div class="ritual-paper ritual-paper-1">
+          <span class="paper-pin"></span>
+          <p class="font-typewriter text-[9px] tracking-wider uppercase mb-2" style="color:rgba(201,169,110,0.6);">Altar</p>
+          <RitualMini client:load />
+        </div>
+        <div class="ritual-paper ritual-paper-2"></div>
+        <div class="ritual-paper ritual-paper-3"></div>
+      </a>
+      
+      <!-- GRIMOIRE: open book (center, large) -->
+      <a href="/journal" class="desk-item grimoire-page" aria-label="Grimoire">
+        <div class="book-page left-page">
+          <div class="page-margin">
+            <p class="font-typewriter text-[8px] tracking-[0.25em] uppercase mb-1" style="color:rgba(240,230,210,0.3);">Entry</p>
+            <JournalMini client:load />
+          </div>
+        </div>
+        <div class="book-page right-page">
+          <div class="page-margin flex flex-col items-center justify-center h-full gap-2">
+            <div class="w-12 h-12 rounded-full border border-dashed flex items-center justify-center" style="border-color:rgba(201,169,110,0.15);">
+              <span class="font-serif text-xl italic" style="color:rgba(201,169,110,0.25);">✦</span>
+            </div>
+            <p class="font-serif text-xs italic text-center leading-relaxed" style="color:rgba(240,230,210,0.4);">
+              Record your intentions<br/>beneath the stars
+            </p>
+            <span class="font-typewriter text-[7px] tracking-[0.2em] uppercase" style="color:rgba(201,169,110,0.3);">Write</span>
+          </div>
+        </div>
+        <div class="book-spine"></div>
+      </a>
+      
+      <!-- MOOD STRIP (below grimoire) -->
+      <div class="desk-item mood-strip">
         <MoodMini client:load />
-      </ScrapbookPane>
+      </div>
+      
+      <!-- DATE TICKET (bottom-right) -->
+      <a href="/week" class="desk-item date-ticket" aria-label="View calendar">
+        <div class="ticket-stub">
+          <div class="ticket-notch ticket-notch-left"></div>
+          <div class="ticket-notch ticket-notch-right"></div>
+          <span class="font-typewriter text-[7px] tracking-[0.3em] uppercase block mb-1" style="color:rgba(201,169,110,0.4);">Today</span>
+          <span class="font-typewriter text-3xl leading-none" style="color:var(--gold);">24</span>
+          <span class="font-serif text-xs italic mt-0.5 block" style="color:var(--text-2);">July</span>
+          <span class="font-typewriter text-[7px] tracking-wider mt-1 block" style="color:rgba(240,230,210,0.35);">🌖 Waning Gibbous</span>
+          <div class="ticket-divider"></div>
+          <span class="font-typewriter text-[6px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.25);">Chart</span>
+        </div>
+      </a>
+      
+      <!-- DECORATIVE MOONS (bottom-left) -->
+      <div class="desk-item deco-moons" aria-hidden="true">
+        <svg viewBox="0 0 80 80" class="moon-svg moon-gold">
+          <path d="M45 8 A32 32 0 1 1 20 68 A24 24 0 1 0 45 8Z" fill="currentColor" stroke="rgba(201,169,110,0.4)" strokeWidth="0.5"/>
+          <circle cx="22" cy="28" r="1.5" fill="rgba(201,169,110,0.3)"/>
+          <circle cx="16" cy="42" r="2" fill="rgba(201,169,110,0.2)"/>
+        </svg>
+        <svg viewBox="0 0 70 70" class="moon-svg moon-sage">
+          <path d="M42 10 A28 28 0 1 1 18 60 A20 20 0 1 0 42 10Z" fill="currentColor" stroke="rgba(140,170,120,0.4)" strokeWidth="0.5"/>
+          <circle cx="20" cy="30" r="1.5" fill="rgba(140,170,120,0.4)"/>
+        </svg>
+        <svg viewBox="0 0 55 55" class="moon-svg moon-teal">
+          <path d="M32 6 A22 22 0 1 1 14 46 A16 16 0 1 0 32 6Z" fill="currentColor" stroke="rgba(120,170,160,0.4)" strokeWidth="0.5"/>
+        </svg>
+        <svg viewBox="0 0 40 40" class="moon-svg moon-rose">
+          <path d="M22 5 A16 16 0 1 1 10 33 A12 12 0 1 0 22 5Z" fill="currentColor" stroke="rgba(190,120,130,0.4)" strokeWidth="0.5"/>
+        </svg>
+        <svg viewBox="0 0 30 30" class="moon-svg moon-ochre">
+          <path d="M18 3 A12 12 0 1 1 6 24 A8 8 0 1 0 18 3Z" fill="currentColor"/>
+        </svg>
+        <svg viewBox="0 0 24 24" class="moon-svg moon-star">
+          <text x="3" y="18" fontSize="16" fill="currentColor">✦</text>
+        </svg>
+      </div>
+      
+      <!-- More scrapbook textures and colors -->
+      <!-- Sage washi tape -->
+      <div class="desk-item washi-tape tape-sage" aria-hidden="true"></div>
+      <!-- Terracotta washi tape -->
+      <div class="desk-item washi-tape tape-terracotta" aria-hidden="true"></div>
+      <!-- Dusty blue washi tape -->
+      <div class="desk-item washi-tape tape-dustyblue" aria-hidden="true"></div>
+      
+      <!-- Lace doily corner -->
+      <div class="desk-item lace-doily" aria-hidden="true"></div>
+      
+      <!-- Coffee ring stain -->
+      <div class="desk-item coffee-stain" aria-hidden="true"></div>
+      
+      <!-- Handwritten annotation -->
+      <div class="desk-item handwritten-note" aria-hidden="true">
+        <span class="font-serif text-[8px] italic" style="color:rgba(140,110,80,0.4);">remember</span>
+      </div>
+      
+      <!-- Pressed flower -->
+      <div class="desk-item pressed-flower" aria-hidden="true">✿</div>
+      
+      <!-- Botanical corner stamp -->
+      <div class="desk-item botanical-stamp" aria-hidden="true">
+        <svg viewBox="0 0 40 40" width="32" height="32">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="rgba(120,160,100,0.25)" strokeWidth="1" strokeDasharray="2,1"/>
+          <text x="20" y="23" textAnchor="middle" fontSize="10" fill="rgba(120,160,100,0.3)">✦</text>
+        </svg>
+      </div>
+      
+      <!-- Thread connecting elements -->
+      <svg class="desk-item connecting-thread" viewBox="0 0 200 120" aria-hidden="true">
+        <path d="M10 80 Q60 20 120 60 T190 30" fill="none" stroke="rgba(201,169,110,0.15)" strokeWidth="0.8" strokeDasharray="3,2"/>
+      </svg>
+      
     </div>
   </div>
 </Layout>
 
+<style>
+  /* ── No-scroll desk ── */
+  .desk-surface {
+    background:
+      radial-gradient(ellipse at 55% 40%, rgba(201,169,110,0.03) 0%, transparent 50%),
+      radial-gradient(ellipse at 15% 85%, rgba(140,170,120,0.025) 0%, transparent 40%),
+      radial-gradient(ellipse at 80% 80%, rgba(176,112,120,0.02) 0%, transparent 35%);
+  }
+  
+  .collage {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap: 0.5rem;
+    width: min(1000px, 96vw);
+    height: calc(100vh - 5rem);
+    max-height: 720px;
+  }
+  
+  .desk-item { position: relative; transition: transform 0.35s ease, filter 0.35s ease; }
+  .desk-item:hover { transform: translateY(-2px) rotate(var(--hover-rotate, 0deg)); filter: brightness(1.1); z-index: 20; }
+
+  /* Oracle */
+  .oracle-card {
+    grid-column: 1 / 3; grid-row: 1 / 3;
+    justify-self: start; align-self: start;
+    transform: rotate(-3.5deg);
+    --hover-rotate: -1.5deg;
+    margin-top: 0.25rem; margin-left: 0.5rem;
+  }
+  .oracle-card > :global(*) { background: none !important; box-shadow: none !important; border: none !important; padding: 0 !important; }
+
+  /* Clock */
+  .clock-face {
+    grid-column: 3 / 5; grid-row: 1 / 3;
+    justify-self: center; align-self: start;
+    transform: rotate(1deg);
+    --hover-rotate: 0deg;
+    margin-top: 0.5rem;
+  }
+
+  /* Ritual stack */
+  .ritual-stack {
+    grid-column: 5 / 8; grid-row: 1 / 3;
+    justify-self: end; align-self: start;
+    transform: rotate(2deg);
+    --hover-rotate: 0.5deg;
+    width: 240px; height: 240px;
+    margin-top: 0.25rem; margin-right: 0.5rem;
+  }
+  .ritual-paper {
+    position: absolute; inset: 0;
+    clip-path: polygon(
+      0% 3%, 4% 0%, 10% 4%, 16% 1%, 24% 5%, 32% 2%, 40% 6%, 48% 3%, 56% 5%, 64% 2%,
+      72% 4%, 80% 1%, 88% 5%, 94% 2%, 100% 4%,
+      100% 97%, 95% 100%, 88% 96%, 80% 99%, 72% 95%, 64% 98%, 56% 96%, 48% 99%,
+      40% 95%, 32% 98%, 24% 96%, 16% 99%, 8% 95%, 4% 98%, 0% 96%
+    );
+    padding: 1rem 1.25rem;
+    backdrop-filter: blur(2px);
+  }
+  .ritual-paper-1 {
+    z-index: 3;
+    background: linear-gradient(165deg, rgba(240,230,210,0.07) 0%, rgba(14,24,48,0.3) 100%);
+    border: 1px solid rgba(201,169,110,0.12);
+  }
+  .ritual-paper-2 {
+    z-index: 2;
+    transform: translate(5px, 7px) rotate(1.5deg);
+    background: rgba(168,149,182,0.04);
+    border: 1px solid rgba(168,149,182,0.08);
+    opacity: 0.55;
+  }
+  .ritual-paper-3 {
+    z-index: 1;
+    transform: translate(-3px, 10px) rotate(-1.5deg);
+    background: rgba(140,170,120,0.03);
+    border: 1px solid rgba(140,170,120,0.06);
+    opacity: 0.35;
+  }
+  .paper-pin {
+    position: absolute; top: -5px; left: 50%; transform: translateX(-50%);
+    width: 7px; height: 7px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #c9a96e, #8a6828);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* Open book */
+  .grimoire-page {
+    grid-column: 1 / 6; grid-row: 2 / 5;
+    justify-self: center; align-self: center;
+    display: flex;
+    transform: rotate(-0.3deg);
+    --hover-rotate: 0.3deg;
+    width: 100%; max-width: 520px; height: 220px;
+    z-index: 5;
+  }
+  .book-page {
+    flex: 1; height: 100%; position: relative;
+    background: linear-gradient(170deg, rgba(240,230,210,0.04) 0%, rgba(14,24,48,0.22) 100%);
+    border: 1px solid rgba(201,169,110,0.08);
+  }
+  .left-page { border-radius: 4px 1px 1px 4px; clip-path: polygon(0% 2%,2% 0%,6% 3%,12% 1%,18% 4%,24% 2%,30% 5%,36% 3%,42% 6%,48% 2%,54% 5%,60% 2%,66% 4%,72% 1%,78% 3%,84% 5%,90% 2%,96% 4%,100% 1%,100% 98%,96% 100%,90% 97%,84% 99%,78% 96%,72% 98%,66% 95%,60% 97%,54% 99%,48% 96%,42% 98%,36% 95%,30% 97%,24% 99%,18% 96%,12% 98%,6% 95%,0% 97%); margin-right: -1px; }
+  .right-page { border-radius: 1px 4px 4px 1px; clip-path: polygon(0% 1%,6% 4%,12% 2%,18% 5%,24% 3%,30% 6%,36% 2%,42% 5%,48% 2%,54% 6%,60% 3%,66% 5%,72% 2%,78% 4%,84% 1%,90% 3%,96% 5%,100% 2%,100% 4%,100% 97%,94% 95%,88% 98%,82% 96%,76% 99%,70% 97%,64% 95%,58% 98%,52% 96%,46% 99%,40% 97%,34% 95%,28% 98%,22% 96%,16% 99%,10% 97%,4% 99%,0% 96%); }
+  .page-margin { padding: 0.875rem 0.75rem; height: 100%; }
+  .book-spine { position: absolute; left: 50%; top: 0; bottom: 0; width: 3px; transform: translateX(-50%); background: linear-gradient(to right, rgba(201,169,110,0.1), rgba(201,169,110,0.25), rgba(201,169,110,0.1)); z-index: 10; box-shadow: 0 0 8px rgba(0,0,0,0.3); }
+
+  /* Mood strip */
+  .mood-strip {
+    grid-column: 2 / 5; grid-row: 5 / 6;
+    justify-self: center; align-self: end;
+    transform: rotate(0.6deg);
+    --hover-rotate: 0deg;
+    padding: 0.4rem 1.25rem;
+    background: linear-gradient(170deg, rgba(168,149,182,0.04) 0%, rgba(14,24,48,0.18) 100%);
+    border: 1px solid rgba(168,149,182,0.1);
+    clip-path: polygon(0% 4%,3% 0%,8% 3%,15% 1%,22% 4%,30% 2%,38% 5%,46% 2%,54% 4%,62% 1%,70% 3%,78% 0%,86% 2%,92% 4%,100% 1%,100% 96%,96% 100%,90% 97%,82% 99%,74% 96%,66% 98%,58% 95%,50% 97%,42% 99%,34% 96%,26% 98%,18% 95%,10% 97%,4% 99%,0% 95%);
+    backdrop-filter: blur(2px);
+  }
+
+  /* Ticket */
+  .date-ticket {
+    grid-column: 5 / 7; grid-row: 4 / 6;
+    justify-self: end; align-self: end;
+    transform: rotate(-2.5deg);
+    --hover-rotate: -1deg;
+    margin-bottom: 0.25rem; margin-right: 0.5rem;
+  }
+  .ticket-stub {
+    position: relative; padding: 0.75rem 1.1rem;
+    background: linear-gradient(165deg, rgba(120,170,160,0.06) 0%, rgba(14,24,48,0.2) 100%);
+    border: 1px solid rgba(120,170,160,0.12);
+    text-align: center; min-width: 85px;
+  }
+  .ticket-stub::before { content: ''; position: absolute; inset: 3px; border: 1px dashed rgba(120,170,160,0.1); pointer-events: none; }
+  .ticket-notch { position: absolute; width: 12px; height: 12px; background: #0f172a; border-radius: 50%; top: 50%; transform: translateY(-50%); }
+  .ticket-notch-left { left: -6px; }
+  .ticket-notch-right { right: -6px; }
+  .ticket-divider { height: 1px; background: repeating-linear-gradient(90deg, rgba(120,170,160,0.2) 0, rgba(120,170,160,0.2) 4px, transparent 4px, transparent 6px); margin: 0.4rem 0; }
+
+  /* Bold colored moons */
+  .deco-moons {
+    grid-column: 1 / 3; grid-row: 4 / 6;
+    justify-self: start; align-self: end;
+    position: relative; width: 160px; height: 120px; pointer-events: none;
+  }
+  .moon-svg { position: absolute; filter: drop-shadow(0 0 8px currentColor); }
+  .moon-gold { width: 68px; height: 68px; color: rgba(201,169,110,0.35); bottom: 0; left: 0; transform: rotate(-22deg); }
+  .moon-sage { width: 50px; height: 50px; color: rgba(140,170,120,0.3); bottom: 18px; left: 44px; transform: rotate(16deg); }
+  .moon-teal { width: 38px; height: 38px; color: rgba(120,170,160,0.32); bottom: 6px; left: 86px; transform: rotate(-12deg); }
+  .moon-rose { width: 28px; height: 28px; color: rgba(190,120,130,0.28); bottom: 44px; left: 92px; transform: rotate(8deg); }
+  .moon-ochre { width: 20px; height: 20px; color: rgba(200,160,80,0.3); bottom: 2px; left: 122px; transform: rotate(-18deg); }
+  .moon-star { width: 18px; height: 18px; color: rgba(201,169,110,0.35); bottom: 54px; left: 58px; }
+
+  /* Washi tape varieties */
+  .washi-tape { position: absolute; pointer-events: none; }
+  .tape-sage {
+    grid-column: 2 / 4; grid-row: 1 / 2; align-self: start; justify-self: center;
+    width: 60px; height: 14px; opacity: 0.35;
+    background: rgba(140,170,120,0.25);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.15) 3px, rgba(255,255,255,0.15) 5px);
+    transform: rotate(-24deg) translateY(-2px);
+  }
+  .tape-terracotta {
+    grid-column: 6 / 8; grid-row: 2 / 3; align-self: start; justify-self: end;
+    width: 50px; height: 14px; opacity: 0.3;
+    background: rgba(190,120,100,0.2);
+    background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
+    background-size: 6px 6px;
+    transform: rotate(18deg) translateX(12px);
+  }
+  .tape-dustyblue {
+    grid-column: 1 / 2; grid-row: 3 / 4; align-self: center; justify-self: start;
+    width: 45px; height: 12px; opacity: 0.28;
+    background: rgba(140,160,190,0.2);
+    background-image: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.1) 4px, rgba(255,255,255,0.1) 5px);
+    transform: rotate(-35deg) translateX(-6px);
+  }
+
+  /* Lace doily corner */
+  .lace-doily {
+    grid-column: 6 / 7; grid-row: 3 / 4; justify-self: end; align-self: start;
+    width: 50px; height: 50px; opacity: 0.2;
+    background: radial-gradient(circle, transparent 30%, rgba(240,230,210,0.15) 31%, rgba(240,230,210,0.15) 34%, transparent 35%, transparent 44%, rgba(240,230,210,0.12) 45%, rgba(240,230,210,0.12) 48%, transparent 49%);
+    border-radius: 50%;
+    transform: rotate(15deg);
+  }
+
+  /* Coffee stain */
+  .coffee-stain {
+    grid-column: 3 / 4; grid-row: 3 / 4; justify-self: center; align-self: end;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 2px solid rgba(120,90,60,0.12);
+    box-shadow: inset 0 0 8px rgba(120,90,60,0.08), 0 0 0 5px rgba(120,90,60,0.03), 0 0 0 10px rgba(120,90,60,0.02);
+    opacity: 0.6;
+    transform: rotate(-10deg) translateY(8px);
+    pointer-events: none;
+  }
+
+  /* Handwritten note */
+  .handwritten-note {
+    grid-column: 5 / 6; grid-row: 3 / 4; justify-self: center; align-self: end;
+    transform: rotate(8deg) translateY(6px);
+    padding: 0.15rem 0.4rem;
+    background: rgba(240,230,210,0.03);
+    border-bottom: 0.5px solid rgba(140,110,80,0.15);
+    pointer-events: none;
+  }
+
+  /* Pressed flower */
+  .pressed-flower {
+    grid-column: 1 / 2; grid-row: 2 / 3; justify-self: start; align-self: center;
+    font-size: 1.2rem; opacity: 0.3; filter: sepia(0.7);
+    transform: rotate(-14deg) translate(-6px, 4px); pointer-events: none;
+  }
+
+  /* Botanical stamp */
+  .botanical-stamp {
+    grid-column: 6 / 7; grid-row: 1 / 2; justify-self: end; align-self: end;
+    transform: rotate(22deg) translate(-4px, 8px); pointer-events: none;
+  }
+
+  /* Connecting thread */
+  .connecting-thread {
+    grid-column: 1 / 5; grid-row: 2 / 4;
+    justify-self: start; align-self: start;
+    width: 200px; height: 100px;
+    pointer-events: none; opacity: 0.5; z-index: 0;
+  }
+
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .collage { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; height: auto; max-height: none; overflow-y: auto; padding-bottom: 2rem; }
+    .desk-item { position: relative; grid-column: auto !important; grid-row: auto !important; justify-self: center !important; align-self: center !important; margin: 0 !important; transform: none !important; width: 100%; max-width: 300px; }
+    .grimoire-page { flex-direction: column; height: auto; max-width: 300px; }
+    .right-page { display: none; }
+    .book-spine { display: none; }
+    .deco-moons, .washi-tape, .pressed-flower, .lace-doily, .coffee-stain, .handwritten-note, .botanical-stamp, .connecting-thread { display: none; }
+  }
+</style>
