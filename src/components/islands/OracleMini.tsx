@@ -57,34 +57,34 @@ export default function OracleMini() {
             style={{
               backfaceVisibility: 'hidden',
               borderRadius: '10px',
-              background: 'linear-gradient(165deg, #1a1a2e 0%, #16213e 40%, #0d1b2a 100%)',
-              border: '2px solid rgba(201,169,110,0.55)',
-              boxShadow: '0 4px 16px rgba(0,0,0,0.5), 0 0 30px rgba(201,169,110,0.08), inset 0 0 40px rgba(0,0,0,0.4)',
+              background: 'linear-gradient(165deg, #1a2e22 0%, #14241b 40%, #0d1a13 100%)',
+              border: '2px solid rgba(196,176,110,0.50)',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.5), 0 0 30px rgba(196,176,110,0.10), inset 0 0 40px rgba(0,0,0,0.4)',
             }}
           >
             {/* Top corner number */}
             <div className="w-full px-3 flex justify-between">
-              <span style={{fontSize: '9px', color: 'rgba(201,169,110,0.7)', fontFamily: "'Special Elite', monospace"}}>I</span>
-              <span style={{fontSize: '9px', color: 'rgba(201,169,110,0.7)', fontFamily: "'Special Elite', monospace"}}>✦</span>
+              <span style={{fontSize: '9px', color: 'rgba(196,176,110,0.75)', fontFamily: "'Special Elite', monospace"}}>I</span>
+              <span style={{fontSize: '9px', color: 'rgba(196,176,110,0.75)', fontFamily: "'Special Elite', monospace"}}>✦</span>
             </div>
 
             {/* Center ornament */}
             <div className="flex flex-col items-center gap-2">
               <div className="relative" style={{width: 48, height: 48}}>
-                <div className="absolute inset-0 rounded-full border border-[#c9a96e]/25" />
-                <div className="absolute inset-2 rounded-full border border-[#c9a96e]/15" />
-                <div className="absolute inset-4 rounded-full border border-dashed border-[#c9a96e]/20" />
-                <div className="absolute inset-0 flex items-center justify-center text-[#c9a96e]/60 text-2xl">☾</div>
+                <div className="absolute inset-0 rounded-full border border-[#c9a96e]/32" />
+                <div className="absolute inset-2 rounded-full border border-[#c9a96e]/20" />
+                <div className="absolute inset-4 rounded-full border border-dashed border-[#c9a96e]/24" />
+<div className="absolute inset-0 flex items-center justify-center text-[#c9a96e]/75 text-2xl" style={{filter: "drop-shadow(0 0 6px rgba(201,169,110,0.3))"}}>☾</div>
               </div>
-              <span style={{fontSize: '7px', color: 'rgba(201,169,110,0.5)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.4em', textTransform: 'uppercase'}}>
+              <span style={{fontSize: '7px', color: 'rgba(196,176,110,0.58)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.4em', textTransform: 'uppercase'}}>
                 The Oracle
               </span>
             </div>
 
             {/* Bottom label */}
             <div className="flex flex-col items-center gap-1">
-              <div style={{width: 40, height: 1, background: 'rgba(201,169,110,0.2)'}} />
-              <span style={{fontSize: '7px', color: 'rgba(201,169,110,0.4)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.2em'}}>
+              <div style={{width: 40, height: 1, background: 'rgba(196,176,110,0.28)'}} />
+              <span style={{fontSize: '7px', color: 'rgba(196,176,110,0.50)', fontFamily: "'Special Elite', monospace", letterSpacing: '0.2em'}}>
                 {moon.emoji} {moon.name}
               </span>
             </div>
@@ -143,4 +143,3 @@ export default function OracleMini() {
     </div>
   );
 }
-
