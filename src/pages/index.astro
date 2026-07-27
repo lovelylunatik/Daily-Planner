@@ -48,17 +48,17 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
       <MoodMini client:load />
     </div>
     
-    <!-- DATE TICKET — bottom-right, like a loose ticket stub -->
+    <!-- DATE TICKET — bottom-right, larger vintage ticket stub -->
     <a href="/week" class="desk-piece date-ticket" aria-label="View calendar">
       <div class="ticket-stub">
         <div class="ticket-notch ticket-notch-left"></div>
         <div class="ticket-notch ticket-notch-right"></div>
-        <span class="font-typewriter text-[7px] tracking-[0.3em] uppercase block mb-1" style="color:rgba(201,169,110,0.4);">Today</span>
-        <span class="font-typewriter text-3xl leading-none" style="color:var(--gold);">24</span>
-        <span class="font-serif text-xs italic mt-0.5 block" style="color:var(--text-2);">July</span>
-        <span class="font-typewriter text-[7px] tracking-wider mt-1 block" style="color:rgba(240,230,210,0.35);">🌖 Waning Gibbous</span>
+        <span class="font-typewriter text-[9px] tracking-[0.3em] uppercase block mb-2" style="color:rgba(201,169,110,0.5);">Today</span>
+        <span class="font-typewriter text-5xl leading-none" style="color:var(--gold);">24</span>
+        <span class="font-serif text-sm italic mt-1 block" style="color:var(--text-2);">July</span>
+        <span class="font-typewriter text-[8px] tracking-wider mt-2 block" style="color:rgba(240,230,210,0.4);">🌖 Waning Gibbous</span>
         <div class="ticket-divider"></div>
-        <span class="font-typewriter text-[6px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.25);">Chart</span>
+        <span class="font-typewriter text-[8px] tracking-[0.2em] uppercase block mt-1" style="color:rgba(201,169,110,0.35);">Chart</span>
       </div>
     </a>
     
@@ -281,22 +281,50 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     z-index: 7;
   }  /* ── DATE TICKET ── */
   .date-ticket {
-    bottom: 6%;
-    right: 6%;
+    bottom: 4%;
+    right: 4%;
     transform: rotate(-2.5deg);
     z-index: 6;
   }
   .ticket-stub {
-    position: relative; padding: 0.75rem 1.1rem;
-    background: linear-gradient(165deg, rgba(120,170,160,0.06) 0%, rgba(14,24,48,0.2) 100%);
-    border: 1px solid rgba(120,170,160,0.12);
-    text-align: center; min-width: 85px;
+    position: relative;
+    padding: 1.25rem 1.5rem;
+    background:
+      radial-gradient(ellipse at 20% 20%, rgba(200, 180, 150, 0.08) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 80%, rgba(120, 170, 160, 0.06) 0%, transparent 50%),
+      linear-gradient(165deg, rgba(232, 223, 208, 0.10) 0%, rgba(14, 24, 48, 0.22) 100%);
+    border: 1.5px solid rgba(180, 160, 120, 0.20);
+    text-align: center;
+    min-width: 120px;
+    border-radius: 2px;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.03);
   }
-  .ticket-stub::before { content: ''; position: absolute; inset: 3px; border: 1px dashed rgba(120,170,160,0.1); pointer-events: none; }
-  .ticket-notch { position: absolute; width: 12px; height: 12px; background: #0f172a; border-radius: 50%; top: 50%; transform: translateY(-50%); }
-  .ticket-notch-left { left: -6px; }
-  .ticket-notch-right { right: -6px; }
-  .ticket-divider { height: 1px; background: repeating-linear-gradient(90deg, rgba(120,170,160,0.2) 0, rgba(120,170,160,0.2) 4px, transparent 4px, transparent 6px); margin: 0.4rem 0; }
+  .ticket-stub::before {
+    content: '';
+    position: absolute;
+    inset: 4px;
+    border: 1px dashed rgba(201, 169, 110, 0.12);
+    pointer-events: none;
+    border-radius: 1px;
+  }
+  .ticket-notch {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #0f172a;
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    border: 1px solid rgba(180, 160, 120, 0.15);
+  }
+  .ticket-notch-left { left: -8px; }
+  .ticket-notch-right { right: -8px; }
+  .ticket-divider {
+    height: 1px;
+    background: repeating-linear-gradient(90deg, rgba(201, 169, 110, 0.25) 0, rgba(201, 169, 110, 0.25) 5px, transparent 5px, transparent 8px);
+    margin: 0.6rem 0;
+  }
 
   /* ── DECORATIVE MOONS ── */
   .deco-moons {
