@@ -4,6 +4,8 @@ import { usePlannerStore } from '../../stores/usePlannerStore';
 import { todayKey } from '../../lib/utils';
 
 // ═══ Hand-drawn sketch-style SVG mood icons ═══
+const ink = '#3a2e1f';
+
 const SketchDice = () => (
   <svg viewBox="0 0 52 52" width="52" height="52" fill="none" style={{filter:'drop-shadow(0 1px 2px rgba(0,0,0,0.15))'}}>
     <rect x="8" y="14" width="16" height="16" rx="2.5"
@@ -42,16 +44,28 @@ const SketchSun = () => (
   </svg>
 );
 
-const SketchTear = () => (
+const SketchCryingFace = () => (
   <svg viewBox="0 0 52 52" width="52" height="52" fill="none" style={{filter:'drop-shadow(0 1px 2px rgba(0,0,0,0.15))'}}>
-    <path d="M10 26 Q10 16 26 16 Q42 16 42 26 Q42 30 26 30 Q10 30 10 26Z"
-      stroke="#5a4a3a" strokeWidth="1.5" fill="rgba(120,150,170,0.06)" strokeLinecap="round"/>
-    <circle cx="26" cy="24" r="3.5" stroke="#5a4a3a" strokeWidth="1.2" fill="none"/>
-    <circle cx="26" cy="24" r="1.2" fill="#5a4a3a"/>
-    <path d="M34 28 Q34 38 30 40 Q26 42 28 34 Q30 28 34 28Z"
-      stroke="#6a8aaa" strokeWidth="1.2" strokeLinecap="round"
-      fill="rgba(120,160,200,0.18)"/>
-    <ellipse cx="30" cy="35" rx="1" ry="2.5" fill="rgba(200,220,240,0.4)" transform="rotate(15 30 35)"/>
+    {/* Face circle */}
+    <circle cx="26" cy="26" r="16" stroke="#5a4a3a" strokeWidth="1.5" strokeLinecap="round"
+      fill="rgba(140,170,200,0.06)"/>
+    {/* Sad left eye — downward arc */}
+    <path d="M16.5 22 Q19.5 25 22.5 22" stroke="#5a4a3a" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+    {/* Sad right eye */}
+    <path d="M29.5 22 Q32.5 25 35.5 22" stroke="#5a4a3a" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+    {/* Tears falling from eyes */}
+    <path d="M17 24 Q16 30 17.5 34 Q18.5 32.5 18 28 Q17.8 25 17 24Z"
+      stroke="#6a8aaa" strokeWidth="1" strokeLinecap="round" fill="rgba(120,160,200,0.18)"/>
+    <path d="M35 24 Q36 30 34.5 34 Q33.5 32.5 34 28 Q34.2 25 35 24Z"
+      stroke="#6a8aaa" strokeWidth="1" strokeLinecap="round" fill="rgba(120,160,200,0.18)"/>
+    {/* Highlight in tears */}
+    <ellipse cx="17.5" cy="30" rx="0.6" ry="1.5" fill="rgba(200,220,240,0.5)" transform="rotate(8 17.5 30)"/>
+    <ellipse cx="34.5" cy="30" rx="0.6" ry="1.5" fill="rgba(200,220,240,0.5)" transform="rotate(-8 34.5 30)"/>
+    {/* Downturned mouth */}
+    <path d="M20 34 Q26 30 32 34" stroke="#5a4a3a" strokeWidth="1.2" fill="none" strokeLinecap="round"/>
+    {/* Little eyebrows */}
+    <path d="M15 19 Q19 18 23 19" stroke="#5a4a3a" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
+    <path d="M29 19 Q33 18 37 19" stroke="#5a4a3a" strokeWidth="0.8" fill="none" strokeLinecap="round"/>
   </svg>
 );
 
@@ -83,7 +97,7 @@ const SketchTrophy = () => (
 const MOODS = [
   { key: 'lucky', label: 'Lucky', icon: SketchDice, color: '#6a8a5a', scent: 'clover & rain' },
   { key: 'happy', label: 'Happy', icon: SketchSun, color: '#c9a050', scent: 'honey & light' },
-  { key: 'sad', label: 'Sad', icon: SketchTear, color: '#7a8aaa', scent: 'petals & salt' },
+  { key: 'sad', label: 'Sad', icon: SketchCryingFace, color: '#7a8aaa', scent: 'petals & salt' },
   { key: 'angry', label: 'Angry', icon: SketchFire, color: '#b06040', scent: 'ember & ash' },
   { key: 'proud', label: 'Proud', icon: SketchTrophy, color: '#a08040', scent: 'gold & laurel' },
 ] as const;
@@ -118,38 +132,53 @@ export default function MoodMini() {
 
   return (
     <div className="w-full" style={{ padding: '0.25rem 0.5rem' }}>
-      <p className="text-center font-typewriter text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: 'rgba(90,70,50,0.45)' }}>
+      <p className="text-center font-typewriter text-[8px] tracking-[0.3em] uppercase mb-2" style={{ color: 'rgba(201,169,110,0.55)' }}>
         How does the ether find you?
       </p>
 
       <div className="flex items-center justify-center gap-2">
-        <button onClick={prev} type="button" className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95" style={{ border: '1px solid rgba(90,70,50,0.15)', color: 'rgba(90,70,50,0.35)' }} aria-label="Previous mood">
+        <button onClick={prev} type="button" className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+          style={{ border: '1px solid rgba(201,169,110,0.22)', color: 'rgba(201,169,110,0.45)' }} aria-label="Previous mood">
           <span className="text-xs">◀</span>
         </button>
 
         <div className="relative" style={{ width: 64, height: 64 }}>
           <AnimatePresence mode="wait">
-            <motion.div key={current.key} initial={{ opacity: 0, scale: 0.85, rotate: -8 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} exit={{ opacity: 0, scale: 0.85, rotate: 8 }} transition={{ duration: 0.3, ease: 'easeOut' }} className="absolute inset-0 flex flex-col items-center justify-center">
+            <motion.div key={current.key} initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              exit={{ opacity: 0, scale: 0.85, rotate: 8 }}
+              transition={{ duration: 0.3, ease: 'easeOut' }}
+              className="absolute inset-0 flex flex-col items-center justify-center">
               <Icon />
             </motion.div>
           </AnimatePresence>
           {savedMood === current.key && (
-            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full" style={{ background: current.color, boxShadow: '0 0 5px ' + current.color }} />
+            <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }}
+              className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full"
+              style={{ background: current.color, boxShadow: '0 0 5px ' + current.color }} />
           )}
         </div>
 
-        <button onClick={next} type="button" className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95" style={{ border: '1px solid rgba(90,70,50,0.15)', color: 'rgba(90,70,50,0.35)' }} aria-label="Next mood">
+        <button onClick={next} type="button" className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-all hover:scale-110 active:scale-95"
+          style={{ border: '1px solid rgba(201,169,110,0.22)', color: 'rgba(201,169,110,0.45)' }} aria-label="Next mood">
           <span className="text-xs">▶</span>
         </button>
       </div>
 
       <div className="text-center mt-1.5">
         <p className="font-serif text-sm italic" style={{ color: current.color }}>{current.label}</p>
-        <p className="font-typewriter text-[7px] tracking-wider mt-0.5" style={{ color: 'rgba(90,70,50,0.35)' }}>{current.scent}</p>
+        <p className="font-typewriter text-[7px] tracking-wider mt-0.5" style={{ color: 'rgba(201,169,110,0.40)' }}>
+          {current.scent}
+        </p>
       </div>
 
       <div className="flex justify-center mt-2">
-        <button onClick={select} type="button" className="px-3 py-1 rounded-full text-[9px] font-typewriter tracking-wider uppercase transition-all hover:scale-105 active:scale-95" style={{ background: savedMood === current.key ? current.color + '15' : 'transparent', border: '1px solid ' + (savedMood === current.key ? current.color + '40' : 'rgba(90,70,50,0.15)'), color: savedMood === current.key ? current.color : 'rgba(90,70,50,0.35)' }}>
+        <button onClick={select} type="button" className="px-3 py-1 rounded-full text-[9px] font-typewriter tracking-wider uppercase transition-all hover:scale-105 active:scale-95"
+          style={{
+            background: savedMood === current.key ? current.color + '18' : 'rgba(201,169,110,0.06)',
+            border: '1px solid ' + (savedMood === current.key ? current.color + '45' : 'rgba(201,169,110,0.22)'),
+            color: savedMood === current.key ? current.color : 'rgba(201,169,110,0.55)',
+          }}>
           {savedMood === current.key ? 'Recorded ✓' : 'Select'}
         </button>
       </div>
