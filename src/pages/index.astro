@@ -31,7 +31,7 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
         <p class="font-typewriter text-[9px] tracking-wider uppercase mb-2" style="color:rgba(201,169,110,0.6);">Altar</p>
         <RitualMini client:load />
       </div>
-      <a href="/rituals" style="position:absolute;top:4px;right:6px;font-size:10px;color:rgba(201,169,110,0.35);text-decoration:none;z-index:20;">→</a>
+      <a href="/rituals" style="position:absolute;top:4px;right:6px;font-size:10px;color:rgba(201,169,110,0.65);text-decoration:none;z-index:20;">→</a>
       <div class="ritual-paper ritual-paper-2"></div>
       <div class="ritual-paper ritual-paper-3"></div>
     </div>
@@ -293,20 +293,19 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     z-index: 2;
   }
   .moon-svg { position: absolute; filter: drop-shadow(0 0 8px currentColor); }
-  .moon-gold { width: 68px; height: 68px; color: rgba(201,169,110,0.35); bottom: 0; left: 0; transform: rotate(-22deg); }
-  .moon-sage { width: 50px; height: 50px; color: rgba(140,170,120,0.3); bottom: 18px; left: 44px; transform: rotate(16deg); }
-  .moon-teal { width: 38px; height: 38px; color: rgba(120,170,160,0.32); bottom: 6px; left: 86px; transform: rotate(-12deg); }
-  .moon-rose { width: 28px; height: 28px; color: rgba(190,120,130,0.28); bottom: 44px; left: 92px; transform: rotate(8deg); }
-  .moon-ochre { width: 20px; height: 20px; color: rgba(200,160,80,0.3); bottom: 2px; left: 122px; transform: rotate(-18deg); }
-  .moon-star { width: 18px; height: 18px; color: rgba(201,169,110,0.35); bottom: 54px; left: 58px; }
+  .moon-gold { width: 68px; height: 68px; color: rgba(201,169,110,0.65); bottom: 0; left: 0; transform: rotate(-22deg); }
+  .moon-sage { width: 50px; height: 50px; color: rgba(140,170,120,0.55); bottom: 18px; left: 44px; transform: rotate(16deg); }
+  .moon-teal { width: 38px; height: 38px; color: rgba(120,170,160,0.58); bottom: 6px; left: 86px; transform: rotate(-12deg); }
+  .moon-rose { width: 28px; height: 28px; color: rgba(190,120,130,0.52); bottom: 44px; left: 92px; transform: rotate(8deg); }
+  .moon-ochre { width: 20px; height: 20px; color: rgba(200,160,80,0.55); bottom: 2px; left: 122px; transform: rotate(-18deg); }
+  .moon-star { width: 18px; height: 18px; color: rgba(201,169,110,0.65); bottom: 54px; left: 58px; }
 
   /* ── WASHI TAPE ── */
   .washi-tape { pointer-events: none; z-index: 3; }
   .tape-sage {
     top: 2%;
     left: 32%;
-    width: 60px; height: 14px; opacity: 0.35;
-    background: rgba(140,170,120,0.25);
+    background: rgba(140,170,120,0.55);
     background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(255,255,255,0.15) 3px, rgba(255,255,255,0.15) 5px);
     transform: rotate(-24deg);
   }
@@ -314,7 +313,7 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     top: 18%;
     right: 2%;
     width: 55px; height: 14px; opacity: 0.3;
-    background: rgba(190,120,100,0.2);
+    background: rgba(190,120,100,0.50);
     background-image: radial-gradient(circle, rgba(255,255,255,0.12) 1px, transparent 1px);
     background-size: 6px 6px;
     transform: rotate(18deg);
@@ -323,7 +322,7 @@ import WhimsyDecorations from '../components/ui/WhimsyDecorations.astro';
     top: 35%;
     left: 1%;
     width: 45px; height: 12px; opacity: 0.28;
-    background: rgba(140,160,190,0.2);
+    background: rgba(140,160,190,0.50);
     background-image: repeating-linear-gradient(90deg, transparent, transparent 4px, rgba(255,255,255,0.1) 4px, rgba(255,255,255,0.1) 5px);
     transform: rotate(-35deg);
   }
